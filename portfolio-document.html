@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:#f0f0ec;color:#1a1a18;}
+.page{width:794px;min-height:1123px;background:#fff;margin:0 auto 32px;overflow:hidden;position:relative;}
+.cover{background:#0f1f3d;width:100%;min-height:1123px;display:flex;flex-direction:column;}
+.stripe{height:8px;background:#4a9eff;}
+.cbody{padding:64px 60px 52px;flex:1;display:flex;flex-direction:column;}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:0.16em;color:#4a9eff;text-transform:uppercase;margin-bottom:14px;}
+.ch1{font-size:48px;font-weight:700;color:#fff;line-height:1.1;margin-bottom:12px;}
+.ch2{font-size:18px;color:#7fa8d4;margin-bottom:40px;line-height:1.5;}
+.cdiv{height:1px;background:rgba(255,255,255,0.1);margin-bottom:40px;}
+.cmeta{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:48px;}
+.cml{font-size:9px;font-weight:700;letter-spacing:0.12em;color:#4a9eff;text-transform:uppercase;margin-bottom:5px;}
+.cmv{font-size:13px;color:#c8dff0;line-height:1.55;}
+.cstats{display:flex;gap:0;margin-bottom:48px;}
+.cst{flex:1;padding:20px;border-left:1px solid rgba(255,255,255,0.1);}
+.cst:first-child{border-left:none;}
+.csn{font-size:36px;font-weight:700;color:#4a9eff;}
+.csl{font-size:10px;color:#7fa8d4;text-transform:uppercase;letter-spacing:0.07em;margin-top:4px;}
+.ctoc-title{font-size:9px;font-weight:700;letter-spacing:0.12em;color:#4a9eff;text-transform:uppercase;margin-bottom:14px;}
+.ctoc{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.ctoc-item{display:flex;align-items:center;gap:9px;font-size:12px;color:#a0bcd8;}
+.ctoc-n{width:22px;height:22px;background:rgba(74,158,255,0.15);border:1px solid rgba(74,158,255,0.3);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#4a9eff;flex-shrink:0;}
+.cfoot{margin-top:auto;padding-top:32px;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;}
+.cfn{font-size:13px;font-weight:600;color:#fff;}
+.cft{font-size:10px;color:#7fa8d4;}
+.cpn{font-size:10px;color:#4a6a8a;}
+.inner{padding:52px 60px;min-height:1123px;display:flex;flex-direction:column;}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;padding-bottom:13px;border-bottom:2.5px solid #0f1f3d;}
+.pnb{font-size:9px;font-weight:700;letter-spacing:0.14em;color:#4a9eff;text-transform:uppercase;margin-bottom:3px;}
+.pt{font-size:26px;font-weight:700;color:#0f1f3d;}
+.ps{font-size:12px;color:#888;margin-top:2px;}
+.plogo{font-size:10px;font-weight:700;color:#0f1f3d;letter-spacing:0.05em;}
+.st{font-size:10px;font-weight:700;letter-spacing:0.1em;color:#0f1f3d;text-transform:uppercase;border-bottom:2px solid #4a9eff;padding-bottom:5px;margin-bottom:13px;display:inline-block;}
+.prose{font-size:12.5px;color:#444;line-height:1.72;margin-bottom:13px;}
+.prose strong{color:#1a1a18;font-weight:600;}
+.cbox{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #185fa5;border-radius:7px;padding:16px;margin-bottom:18px;}
+.cbox p{font-size:12px;color:#1e3a8a;line-height:1.7;margin-bottom:8px;}
+.cbox p:last-child{margin-bottom:0;}
+.hl{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:13px;margin-bottom:16px;}
+.hl p{font-size:11.5px;color:#1e3a8a;line-height:1.65;}
+.card{background:#f8f8f6;border-radius:7px;padding:13px;margin-bottom:11px;}
+.card-role{font-size:9px;font-weight:700;color:#4a9eff;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;}
+.card-title{font-size:12px;font-weight:700;color:#0f1f3d;margin-bottom:4px;}
+.card-body{font-size:11px;color:#555;line-height:1.65;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+.g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;}
+.mrow{display:flex;gap:12px;margin-bottom:20px;}
+.mbox{flex:1;background:#0f1f3d;border-radius:7px;padding:15px;text-align:center;}
+.mnum{font-size:28px;font-weight:700;color:#4a9eff;}
+.mlbl{font-size:9px;color:#7fa8d4;text-transform:uppercase;letter-spacing:0.07em;margin-top:5px;}
+.mbox2{flex:1;background:#f0f4ff;border-radius:7px;padding:15px;text-align:center;border:1px solid #d0dcf5;}
+.mnum2{font-size:26px;font-weight:700;color:#0f1f3d;}
+.mlbl2{font-size:9px;color:#6080b0;text-transform:uppercase;letter-spacing:0.07em;margin-top:5px;}
+.tl{position:relative;padding-left:26px;}
+.tl::before{content:'';position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:#e0e8f5;}
+.tli{position:relative;margin-bottom:16px;}
+.tld{position:absolute;left:-26px;top:3px;width:13px;height:13px;border-radius:50%;background:#0f1f3d;border:3px solid #fff;box-shadow:0 0 0 2px #4a9eff;}
+.tlw{font-size:9px;font-weight:700;color:#4a9eff;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:2px;}
+.tlt{font-size:11.5px;color:#444;line-height:1.6;}
+.rt{width:100%;border-collapse:collapse;font-size:11px;}
+.rt th{background:#0f1f3d;color:#7fa8d4;padding:7px 9px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;text-align:left;}
+.rt td{padding:7px 9px;border-bottom:1px solid #eee;color:#444;vertical-align:top;}
+.rt td:first-child{font-weight:600;color:#1a1a18;}
+.rt tr:nth-child(even) td{background:#fafaf8;}
+.br{display:inline-block;padding:2px 6px;border-radius:3px;font-size:9px;font-weight:700;}
+.br-r{background:#dbeafe;color:#1e3a8a;}
+.br-a{background:#fde8d8;color:#7c2d12;}
+.br-c{background:#d1fae5;color:#064e3b;}
+.br-i{background:#f1efea;color:#5f5e5a;}
+.rh{background:#fee2e2;color:#991b1b;padding:2px 6px;border-radius:3px;font-size:9px;font-weight:700;}
+.rm{background:#fef3c7;color:#92400e;padding:2px 6px;border-radius:3px;font-size:9px;font-weight:700;}
+.rl{background:#d1fae5;color:#064e3b;padding:2px 6px;border-radius:3px;font-size:9px;font-weight:700;}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:16px;}
+.cc{background:#f8f8f6;border-radius:7px;padding:12px;border-left:3px solid #4a9eff;}
+.cct{font-size:11px;font-weight:700;color:#0f1f3d;margin-bottom:4px;}
+.ccb{font-size:10.5px;color:#555;line-height:1.6;}
+.oban{background:#0f1f3d;border-radius:9px;padding:24px 28px;margin-bottom:18px;}
+.op{color:#a0bcd8;font-size:12px;line-height:1.75;margin-bottom:16px;}
+.osts{display:flex;gap:0;}
+.ost{flex:1;border-left:1px solid rgba(255,255,255,0.1);padding:0 16px;}
+.ost:first-child{border-left:none;padding-left:0;}
+.osv{font-size:28px;font-weight:700;color:#4a9eff;}
+.osl{font-size:9px;color:#7fa8d4;text-transform:uppercase;letter-spacing:0.07em;margin-top:3px;}
+.lc{background:#f8f8f6;border-radius:7px;padding:13px;margin-bottom:9px;display:flex;gap:11px;}
+.ln{width:24px;height:24px;background:#0f1f3d;color:#4a9eff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;}
+.lt{font-size:11px;font-weight:700;color:#0f1f3d;margin-bottom:3px;}
+.lb{font-size:10.5px;color:#555;line-height:1.6;}
+.pfoot{margin-top:auto;padding-top:18px;border-top:1px solid #eee;display:flex;justify-content:space-between;align-items:center;}
+.pft{font-size:9px;color:#aaa;text-transform:uppercase;letter-spacing:0.07em;}
+.pfn{font-size:9px;color:#aaa;}
+/* Gantt */
+.gantt-wrap{overflow-x:auto;margin-bottom:20px;}
+.gantt{width:100%;border-collapse:collapse;font-size:10px;}
+.gantt th{background:#0f1f3d;color:#7fa8d4;padding:6px 8px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;text-align:center;border:1px solid #1a3158;}
+.gantt td{padding:5px 8px;border:1px solid #eee;font-size:10px;color:#444;vertical-align:middle;}
+.gantt td:first-child{font-weight:600;color:#1a1a18;width:22%;background:#fafaf8;}
+.gbar{height:14px;border-radius:3px;background:#0f1f3d;}
+.gbar-blue{background:#185fa5;}
+.gbar-teal{background:#0f6e56;}
+.gbar-orange{background:#854F0B;}
+/* Budget table */
+.bt{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:16px;}
+.bt th{background:#0f1f3d;color:#7fa8d4;padding:7px 9px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;text-align:left;}
+.bt td{padding:7px 9px;border-bottom:1px solid #eee;color:#444;}
+.bt td:first-child{font-weight:600;color:#1a1a18;}
+.bt tr:nth-child(even) td{background:#fafaf8;}
+.bt tfoot td{font-weight:700;color:#0f1f3d;background:#f0f4ff;border-top:2px solid #0f1f3d;}
+/* PIM */
+.pim{border-collapse:collapse;font-size:10px;}
+.pim td,.pim th{width:52px;height:36px;text-align:center;border:1px solid #ddd;font-size:9px;font-weight:600;}
+.pim-h{background:#fee2e2;color:#991b1b;}
+.pim-m{background:#fef3c7;color:#92400e;}
+.pim-l{background:#d1fae5;color:#064e3b;}
+.pim-0{background:#f8f8f6;color:#888;}
+.pim-axis{background:#0f1f3d;color:#7fa8d4;font-size:9px;font-weight:700;}
+/* Issue log */
+.issue-log{width:100%;border-collapse:collapse;font-size:11px;}
+.issue-log th{background:#0f1f3d;color:#7fa8d4;padding:7px 9px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;text-align:left;}
+.issue-log td{padding:7px 9px;border-bottom:1px solid #eee;color:#444;vertical-align:top;}
+.issue-log td:first-child{font-weight:600;color:#1a1a18;width:18%;}
+.issue-resolved{background:#d1fae5;color:#064e3b;padding:2px 7px;border-radius:3px;font-size:9px;font-weight:700;}
+.issue-open{background:#fee2e2;color:#991b1b;padding:2px 7px;border-radius:3px;font-size:9px;font-weight:700;}
+@media print{body{background:#fff;}.page{margin:0;page-break-after:always;}}
+</style>
+</head>
+<body>
+
+<style>
+.site-nav{position:sticky;top:0;z-index:100;height:60px;background:#f5f5f3;display:flex;align-items:center;justify-content:space-between;padding:0 40px;border-bottom:1px solid rgba(0,0,0,0.07);font-family:'Manrope',sans-serif;}
+.site-nav-logo{font-weight:700;font-size:15px;letter-spacing:-0.01em;color:#0e0e0e;text-decoration:none;}
+.site-nav-center{display:flex;gap:32px;}
+.site-nav-link{font-size:14px;font-weight:500;color:#666;transition:color 0.18s;text-decoration:none;}
+.site-nav-link:hover{color:#0e0e0e;}
+.site-nav-right{display:flex;gap:16px;align-items:center;}
+.site-nav-icon{color:#666;transition:color 0.18s;display:flex;align-items:center;text-decoration:none;}
+.site-nav-icon:hover{color:#0e0e0e;}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<nav class="site-nav">
+  <a class="site-nav-logo" href="/">Hafsa Yaseen</a>
+  <div class="site-nav-center">
+    <a href="/#work" class="site-nav-link">Work</a>
+    <a href="/about.html" class="site-nav-link">About</a>
+    <a href="/experience.html" class="site-nav-link">Experience</a>
+  </div>
+  <div class="site-nav-right">
+    <a class="site-nav-icon" href="https://www.linkedin.com/in/-hafsa-yaseen/" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- PAGE 1: COVER -->
+<div class="page">
+<div class="cover">
+<div class="stripe"></div>
+<div class="cbody">
+  <div class="eyebrow">Project Management Portfolio</div>
+  <div class="ch1">Mathematics<br>Entrance Exam<br>Preparation</div>
+  <div class="ch2">Community Mobilization &amp; Educational Access Programme<br>Pak Alliance for Math and Science &middot; Karachi, Pakistan</div>
+  <div class="cdiv"></div>
+  <div class="cmeta">
+    <div><div class="cml">Project Lead</div><div class="cmv">Hafsa Yaseen<br>Pak Alliance for Math and Science</div></div>
+    <div><div class="cml">Partner Organisation</div><div class="cmv">Institute of Business Administration (IBA)<br>Karachi, Pakistan</div></div>
+    <div><div class="cml">Timeline</div><div class="cmv">April 2023 (Mobilization) &middot; May&ndash;June 2023 (Workshops)<br>July 2023 (Entrance Exam)</div></div>
+    <div><div class="cml">Team</div><div class="cmv">Project Lead + 2 Interns + 4 University Facilitators<br>Community Outreach, Academic &amp; Logistics Support</div></div>
+  </div>
+  <div class="cstats">
+    <div class="cst"><div class="csn">150</div><div class="csl">Girls enrolled</div></div>
+    <div class="cst"><div class="csn">6</div><div class="csl">Schools engaged</div></div>
+    <div class="cst"><div class="csn">80</div><div class="csl">Sat entrance exam</div></div>
+    <div class="cst"><div class="csn">100%</div><div class="csl">Sessions delivered</div></div>
+  </div>
+  <div>
+    <div class="ctoc-title">Contents</div>
+    <div class="ctoc">
+      <div class="ctoc-item"><div class="ctoc-n">01</div>Project Context &amp; Charter</div>
+      <div class="ctoc-item"><div class="ctoc-n">02</div>Project Schedule &amp; Gantt Chart</div>
+      <div class="ctoc-item"><div class="ctoc-n">03</div>Community Mobilization</div>
+      <div class="ctoc-item"><div class="ctoc-n">04</div>Roles &amp; Responsibilities</div>
+      <div class="ctoc-item"><div class="ctoc-n">05</div>Budget &amp; Resource Management</div>
+      <div class="ctoc-item"><div class="ctoc-n">06</div>Stakeholder &amp; Communications</div>
+      <div class="ctoc-item"><div class="ctoc-n">07</div>Risk Management &amp; PIM</div>
+      <div class="ctoc-item"><div class="ctoc-n">08</div>Monitoring, Control &amp; Issue Log</div>
+      <div class="ctoc-item"><div class="ctoc-n">09</div>Outcomes &amp; Lessons Learned</div>
+    </div>
+  </div>
+  <div class="cfoot">
+    <div><div class="cfn">Hafsa Yaseen</div><div class="cft">Project Lead &middot; Educational Access &amp; Community Mobilization &middot; Karachi 2023</div></div>
+    <div class="cpn">Page 1</div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- PAGE 2: CONTEXT & CHARTER -->
+<div class="page">
+<div class="inner">
+  <div class="ph"><div><div class="pnb">Section 01 &middot; Initiation</div><div class="pt">Project Context &amp; Charter</div><div class="ps">Background, objectives, scope, and project authorisation</div></div><div class="plogo">HAFSA YASEEN &middot; PM PORTFOLIO</div></div>
+  <div class="cbox">
+    <p><strong>The Challenge:</strong> Institute of Business Administration (IBA) Karachi launched a fully-funded BSc Mathematics programme with a reserved quota for public school students. Despite the opportunity, IBA was not receiving sufficient applications from girls in government schools — the talent existed, but the pathway was invisible to them.</p>
+    <p><strong>The Partnership:</strong> IBA approached Pak Alliance for Math and Science — an organisation with strong government school networks in Karachi — to identify, prepare, and support eligible girls to apply and sit the entrance examination. IBA funded the entire programme including venue, transport, exam fees, and facilitator costs.</p>
+    <p><strong>The Social Reality:</strong> Target students came from families living below the poverty line — parents worked as domestic labourers and informal daily-wage workers. Many had never considered university for their daughters. The team's work was as much social as academic: visiting families at home, communicating in Sindhi, dismantling fears about cost and safety, and building the belief that a different future was possible.</p>
+  </div>
+  <div class="st">Project Charter</div>
+  <table style="width:100%;border-collapse:collapse;font-size:11px;margin-bottom:18px;">
+    <tr style="border-bottom:1px solid #eee;"><td style="padding:8px 10px;font-weight:700;color:#0f1f3d;background:#f8f8f6;width:25%;font-size:9.5px;text-transform:uppercase;letter-spacing:0.05em;">Project Name</td><td style="padding:8px 10px;color:#444;">IBA Mathematics Entrance Exam Preparation Programme — Karachi 2023</td></tr>
+    <tr style="border-bottom:1px solid #eee;"><td style="padding:8px 10px;font-weight:700;color:#0f1f3d;background:#f8f8f6;font-size:9.5px;text-transform:uppercase;letter-spacing:0.05em;">Project Lead</td><td style="padding:8px 10px;color:#444;">Hafsa Yaseen — Pak Alliance for Math and Science</td></tr>
+    <tr style="border-bottom:1px solid #eee;"><td style="padding:8px 10px;font-weight:700;color:#0f1f3d;background:#f8f8f6;font-size:9.5px;text-transform:uppercase;letter-spacing:0.05em;">Timeline</td><td style="padding:8px 10px;color:#444;">April 2023 (Mobilization &amp; Parent Engagement) &middot; May–June 2023 (8-week Workshops) &middot; July 2023 (Mock Exam + IBA Entrance Exam)</td></tr>
+    <tr style="border-bottom:1px solid #eee;"><td style="padding:8px 10px;font-weight:700;color:#0f1f3d;background:#f8f8f6;font-size:9.5px;text-transform:uppercase;letter-spacing:0.05em;">Objective</td><td style="padding:8px 10px;color:#444;">Recruit 150 girls from 6 Karachi government schools near IBA, deliver 8 weeks of intensive maths preparation (3x/week, 2 batches), run a mock exam, and support 80+ girls to sit the IBA entrance exam in July 2023.</td></tr>
+    <tr style="border-bottom:1px solid #eee;"><td style="padding:8px 10px;font-weight:700;color:#0f1f3d;background:#f8f8f6;font-size:9.5px;text-transform:uppercase;letter-spacing:0.05em;">Funder</td><td style="padding:8px 10px;color:#444;">Institute of Business Administration (IBA) — covered venue, transport, exam fees, facilitator costs, food provision (exam day)</td></tr>
+    <tr style="border-bottom:1px solid #eee;"><td style="padding:8px 10px;font-weight:700;color:#0f1f3d;background:#f8f8f6;font-size:9.5px;text-transform:uppercase;letter-spacing:0.05em;">Deliverables</td><td style="padding:8px 10px;color:#444;">School visit reports · Student eligibility worksheets · Registration database · RACI matrix · Risk register · Budget tracker · Attendance &amp; assignment logs · Transport schedule · Mock exam · Exam day plan · Final project report to IBA</td></tr>
+    <tr style="border-bottom:1px solid #eee;"><td style="padding:8px 10px;font-weight:700;color:#0f1f3d;background:#f8f8f6;font-size:9.5px;text-transform:uppercase;letter-spacing:0.05em;">Constraints</td><td style="padding:8px 10px;color:#444;">Fixed IBA exam date (July 2023) · Schools must be near IBA for transport feasibility · Core team of 3 (lead + 2 interns) · Programme ran again successfully in 2024</td></tr>
+    <tr><td style="padding:8px 10px;font-weight:700;color:#0f1f3d;background:#f8f8f6;font-size:9.5px;text-transform:uppercase;letter-spacing:0.05em;">Acceptance Criteria</td><td style="padding:8px 10px;color:#444;">150 girls enrolled across 6 schools · 100% session delivery · 80+ girls sit entrance exam · On-budget delivery · Final report submitted to IBA within 2 weeks of exam</td></tr>
+  </table>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px;">
+    <div style="background:#d1fae5;border-radius:6px;padding:12px;"><div style="font-size:9px;font-weight:700;color:#064e3b;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:7px;">In Scope</div><ul style="padding-left:13px;"><li style="font-size:10.5px;color:#065f46;line-height:1.7;">School identification &amp; visits</li><li style="font-size:10.5px;color:#065f46;line-height:1.7;">Eligibility screening &amp; enrollment</li><li style="font-size:10.5px;color:#065f46;line-height:1.7;">Parent engagement (Sindhi/Urdu)</li><li style="font-size:10.5px;color:#065f46;line-height:1.7;">8-week workshop coordination</li><li style="font-size:10.5px;color:#065f46;line-height:1.7;">Daily transport management (IBA-funded)</li><li style="font-size:10.5px;color:#065f46;line-height:1.7;">Attendance, engagement &amp; assignment tracking</li><li style="font-size:10.5px;color:#065f46;line-height:1.7;">Mock exam coordination</li><li style="font-size:10.5px;color:#065f46;line-height:1.7;">Exam day logistics &amp; food provision</li></ul></div>
+    <div style="background:#fee2e2;border-radius:6px;padding:12px;"><div style="font-size:9px;font-weight:700;color:#991b1b;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:7px;">Out of Scope</div><ul style="padding-left:13px;"><li style="font-size:10.5px;color:#7f1d1d;line-height:1.7;">Curriculum design (led by IBA professor)</li><li style="font-size:10.5px;color:#7f1d1d;line-height:1.7;">Exam marking and results processing</li><li style="font-size:10.5px;color:#7f1d1d;line-height:1.7;">Post-exam student follow-up</li><li style="font-size:10.5px;color:#7f1d1d;line-height:1.7;">School infrastructure or IT systems</li><li style="font-size:10.5px;color:#7f1d1d;line-height:1.7;">University admissions decisions</li></ul></div>
+  </div>
+  <div class="pfoot"><div class="pft">Hafsa Yaseen &middot; PM Portfolio &middot; IBA Mathematics Entrance Exam Preparation 2023</div><div class="pfn">Page 2</div></div>
+</div>
+</div>
+
+<!-- PAGE 3: GANTT CHART & SCHEDULE -->
+<div class="page">
+<div class="inner">
+  <div class="ph"><div><div class="pnb">Section 02 &middot; Project Schedule</div><div class="pt">Project Schedule &amp; Gantt Chart</div><div class="ps">Work breakdown, milestone timeline, and baseline vs actual schedule</div></div><div class="plogo">HAFSA YASEEN &middot; PM PORTFOLIO</div></div>
+
+  <div class="st">Baseline vs Actual Gantt Chart</div>
+  <div class="gantt-wrap">
+  <table class="gantt" style="margin-bottom:18px;">
+    <thead>
+      <tr>
+        <th style="text-align:left;width:22%;">Activity</th>
+        <th>Apr W1</th><th>Apr W2</th><th>Apr W3</th><th>Apr W4</th>
+        <th>May W1</th><th>May W2</th><th>May W3</th><th>May W4</th>
+        <th>Jun W1</th><th>Jun W2</th><th>Jun W3</th><th>Jun W4</th>
+        <th>Jul</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>School visits &amp; workshops</td><td style="background:#0f1f3d;"></td><td style="background:#0f1f3d;"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>Eligibility screening</td><td style="background:#185fa5;"></td><td style="background:#185fa5;"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>Parent engagement</td><td></td><td></td><td style="background:#0f1f3d;"></td><td style="background:#0f1f3d;"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>Transport setup</td><td></td><td></td><td style="background:#185fa5;"></td><td style="background:#185fa5;"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td>Workshop delivery (Batch 1+2)</td><td></td><td></td><td></td><td></td><td style="background:#0f6e56;"></td><td style="background:#0f6e56;"></td><td style="background:#0f6e56;"></td><td style="background:#0f6e56;"></td><td style="background:#0f6e56;"></td><td style="background:#0f6e56;"></td><td style="background:#0f6e56;"></td><td style="background:#0f6e56;"></td><td></td></tr>
+      <tr><td>Attendance &amp; assignment tracking</td><td></td><td></td><td></td><td></td><td style="background:#185fa5;"></td><td style="background:#185fa5;"></td><td style="background:#185fa5;"></td><td style="background:#185fa5;"></td><td style="background:#185fa5;"></td><td style="background:#185fa5;"></td><td style="background:#185fa5;"></td><td style="background:#185fa5;"></td><td></td></tr>
+      <tr><td>Mock exam</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td style="background:#854F0B;"></td><td></td></tr>
+      <tr><td>Exam day logistics</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td style="background:#854F0B;"></td></tr>
+      <tr><td>Final report to IBA</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td style="background:#0f1f3d;"></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div style="display:flex;gap:16px;font-size:9.5px;margin-bottom:20px;">
+    <span style="display:flex;align-items:center;gap:5px;"><span style="width:14px;height:10px;background:#0f1f3d;border-radius:2px;display:inline-block;"></span>Mobilization &amp; reporting</span>
+    <span style="display:flex;align-items:center;gap:5px;"><span style="width:14px;height:10px;background:#185fa5;border-radius:2px;display:inline-block;"></span>Planning &amp; tracking</span>
+    <span style="display:flex;align-items:center;gap:5px;"><span style="width:14px;height:10px;background:#0f6e56;border-radius:2px;display:inline-block;"></span>Workshop delivery</span>
+    <span style="display:flex;align-items:center;gap:5px;"><span style="width:14px;height:10px;background:#854F0B;border-radius:2px;display:inline-block;"></span>Exam activities</span>
+  </div>
+
+  <div class="st">Key milestones</div>
+  <div class="tl">
+    <div class="tli"><div class="tld"></div><div class="tlw">April · Weeks 1–2 · School Visits &amp; Screening</div><div class="tlt">Visited 6 government schools near IBA. Ran 1-hour aspirational workshops across multiple classes. Distributed bilingual worksheets (English, Urdu, maths). Selected top 25 girls per school = 150 enrolled. Waitlist maintained for replacements.</div></div>
+    <div class="tli"><div class="tld"></div><div class="tlw">April · Weeks 3–4 · Parent Engagement</div><div class="tlt">School-based parent meetings in Sindhi and Urdu. Addressed cost, safety and feasibility concerns. Obtained commitments. ~dozen parents refused at last minute — replaced from waitlist. Two batches confirmed. Transport schedule agreed with IBA vendor.</div></div>
+    <div class="tli"><div class="tld"></div><div class="tlw">May · Weeks 1–8 · Workshop Delivery</div><div class="tlt">Both batches launched. IBA buses collected girls from schools daily. 4 university facilitators ran sessions under professor supervision. Assignments set and checked every session. 5 girls dropped out across the 8 weeks (replaced where possible). Weekly status reports issued.</div></div>
+    <div class="tli"><div class="tld"></div><div class="tlw">June · Week 8 · Mock Exam</div><div class="tlt">Full mock entrance exam run under exam conditions at IBA. Results reviewed by facilitators. Targeted revision sessions for weak areas. Confidence-building with students ahead of the real exam.</div></div>
+    <div class="tli"><div class="tld"></div><div class="tlw">July 2023 · IBA Entrance Exam Day</div><div class="tlt">80 girls transported to IBA. Food provided on-site. Hafsa and team present throughout. All logistics ran on schedule. Post-exam debrief conducted. Final report submitted to IBA within 2 weeks.</div></div>
+  </div>
+
+  <div class="pfoot"><div class="pft">Hafsa Yaseen &middot; PM Portfolio &middot; IBA Mathematics Entrance Exam Preparation 2023</div><div class="pfn">Page 3</div></div>
+</div>
+</div>
+
+<!-- PAGE 4: COMMUNITY MOBILIZATION -->
+<div class="page">
+<div class="inner">
+  <div class="ph"><div><div class="pnb">Section 03 &middot; Community Mobilization</div><div class="pt">Community Mobilization Strategy</div><div class="ps">Aspirational outreach, eligibility screening, and family engagement</div></div><div class="plogo">HAFSA YASEEN &middot; PM PORTFOLIO</div></div>
+  <div class="hl"><p>The core challenge was social, not academic. Parents of target students — domestic labourers and informal workers below the poverty line — had never imagined university for their daughters. The team's approach combined aspiration-building with practical problem-solving: showing girls a future they hadn't considered possible, then removing every barrier standing between them and it.</p></div>
+
+  <div class="st">Phase 1: School Visits &amp; Aspirational Workshops</div>
+  <p class="prose">Hafsa and her team visited <strong>6 government schools</strong> located near IBA (proximity was a key selection criterion to keep transport cost-effective and safe). In each school, they ran <strong>1-hour aspirational workshops</strong> with multiple classes of eligible secondary students, covering:</p>
+  <div class="g2" style="margin-bottom:16px;">
+    <div class="card"><div class="card-role">Component 1: The Vision</div><div class="card-title">Aspiration-building</div><div class="card-body">Showed girls photos of IBA campus, student life, and career paths. Presented maths as a route out of poverty. Built a narrative: work hard now, change your family's future forever.</div></div>
+    <div class="card"><div class="card-role">Component 2: The Opportunity</div><div class="card-title">IBA scholarship explained</div><div class="card-body">Fully-funded BSc Mathematics. Zero cost to families. Exam preparation provided. Transport to and from school covered. No financial barrier to participation.</div></div>
+    <div class="card"><div class="card-role">Component 3: Eligibility Assessment</div><div class="card-title">Bilingual worksheet</div><div class="card-body">Students wrote (in English and Urdu) why they wanted to join, what they understood about the workshop, and answered basic maths questions to assess readiness.</div></div>
+    <div class="card"><div class="card-role">Component 4: Selection</div><div class="card-title">25 girls per school</div><div class="card-body">Top 25 selected per school based on worksheet scores, teacher recommendations, and expressed motivation. 6 schools × 25 = <strong>150 girls enrolled</strong>. Waitlist maintained for each school.</div></div>
+  </div>
+
+  <div class="st">Phase 2: Parent Engagement Sessions</div>
+  <p class="prose">In the final two weeks of April, Hafsa and Intern 2 (Sindhi-speaking) conducted <strong>parent information meetings at each school</strong>. Many parents could only communicate in Sindhi — making language access a critical enabler. The team came down to the parents' level, respected their concerns, and addressed them directly and honestly.</p>
+  <div class="g3" style="margin-bottom:16px;">
+    <div class="card"><div class="card-title">Language access</div><div class="card-body">Intern 2 fluent in Sindhi. Ensured parents fully understood the opportunity, commitment required, and safety arrangements. No parent left the meeting confused.</div></div>
+    <div class="card"><div class="card-title">Addressing fear &amp; refusal</div><div class="card-body">~Dozen parents refused at last minute due to caregiver responsibilities and safety concerns. Girls replaced from school waitlists — enrollment target of 150 maintained.</div></div>
+    <div class="card"><div class="card-title">Long-term framing</div><div class="card-body">Positioned university as the single most powerful tool to change the family's economic trajectory. Spoke directly to parents' deepest aspirations for their daughters.</div></div>
+  </div>
+
+  <div class="st">Waitlist management</div>
+  <p class="prose">A waitlist of additional screened candidates was maintained for each of the 6 schools from the start of the project. When parents refused at the last minute, or girls dropped out during the programme, waitlist candidates were contacted and onboarded. This ensured the project maintained sufficient participant numbers to achieve the 80-exam-sitter target throughout delivery.</p>
+
+  <div class="pfoot"><div class="pft">Hafsa Yaseen &middot; PM Portfolio &middot; IBA Mathematics Entrance Exam Preparation 2023</div><div class="pfn">Page 4</div></div>
+</div>
+</div>
+
+<!-- PAGE 5: ROLES & RACI -->
+<div class="page">
+<div class="inner">
+  <div class="ph"><div><div class="pnb">Section 04 &middot; Roles &amp; Responsibilities</div><div class="pt">Roles &amp; Responsibilities</div><div class="ps">Org chart, team structure, job functions, and RACI matrix</div></div><div class="plogo">HAFSA YASEEN &middot; PM PORTFOLIO</div></div>
+
+  <div class="st">Organisational structure</div>
+  <div style="display:flex;flex-direction:column;align-items:center;margin-bottom:20px;">
+    <div style="background:#0f1f3d;color:#fff;padding:8px 24px;border-radius:5px;font-size:11px;font-weight:700;margin-bottom:14px;">IBA &amp; Pak Alliance Leadership (Strategic Oversight)</div>
+    <div style="width:1px;height:14px;background:#4a9eff;"></div>
+    <div style="background:#185fa5;color:#fff;padding:8px 24px;border-radius:5px;font-size:11px;font-weight:700;margin-bottom:14px;">Hafsa Yaseen — Project Lead</div>
+    <div style="display:flex;gap:0;width:80%;justify-content:center;position:relative;">
+      <div style="position:absolute;top:0;left:12.5%;right:12.5%;height:1px;background:#4a9eff;"></div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:14px;">
+        <div style="width:1px;height:12px;background:#4a9eff;"></div>
+        <div style="background:#f0f4ff;border:1px solid #d0dcf5;border-radius:4px;padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#1e3a8a;">Field Coordinator<br>(Intern 1)</div>
+        <div style="font-size:9px;color:#888;margin-top:3px;text-align:center;">Logistics &amp; visits</div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:14px;">
+        <div style="width:1px;height:12px;background:#4a9eff;"></div>
+        <div style="background:#f0f4ff;border:1px solid #d0dcf5;border-radius:4px;padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#1e3a8a;">Student Support<br>(Intern 2 · Sindhi)</div>
+        <div style="font-size:9px;color:#888;margin-top:3px;text-align:center;">Parents &amp; welfare</div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:14px;">
+        <div style="width:1px;height:12px;background:#4a9eff;"></div>
+        <div style="background:#f0f4ff;border:1px solid #d0dcf5;border-radius:4px;padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#1e3a8a;">4 University<br>Facilitators</div>
+        <div style="font-size:9px;color:#888;margin-top:3px;text-align:center;">Workshop delivery</div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:14px;">
+        <div style="width:1px;height:12px;background:#4a9eff;"></div>
+        <div style="background:#f0f4ff;border:1px solid #d0dcf5;border-radius:4px;padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#1e3a8a;">IBA Professor<br>(Lead Facilitator)</div>
+        <div style="font-size:9px;color:#888;margin-top:3px;text-align:center;">Academic leadership</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px;">
+    <div class="card"><div class="card-role">Project Lead</div><div class="card-title">Hafsa Yaseen</div><div class="card-body">Overall strategy, delivery and accountability. School partnerships. IBA and Pak Alliance liaison. Transport and food vendor coordination. Budget oversight. Risk and issue management. Final reporting to IBA.</div></div>
+    <div class="card"><div class="card-role">Field Coordinator — Intern 1</div><div class="card-title">Intern 1</div><div class="card-body">School visit support. Student identification and registration. Batch scheduling. Daily transport coordination. Attendance tracking. Exam day on-ground support.</div></div>
+    <div class="card"><div class="card-role">Student Support — Intern 2 (Sindhi-speaking)</div><div class="card-title">Intern 2</div><div class="card-body">Sindhi-language parent engagement. Student welfare monitoring. Absence follow-up within 24hrs. Assignment collection support. Exam readiness tracking. Waitlist management.</div></div>
+    <div class="card"><div class="card-role">University Facilitators (x4 — 2 per batch)</div><div class="card-title">Contracted University Students</div><div class="card-body">Ran sessions under IBA professor supervision. Took daily attendance. Rated student engagement. Checked and returned assignments. Flagged struggling students to Hafsa. Paid PKR 20,000–25,000/month each.</div></div>
+  </div>
+
+  <div class="st">RACI Matrix</div>
+  <table class="rt" style="margin-bottom:11px;">
+    <thead><tr><th style="width:26%;">Activity</th><th>Project Lead</th><th>Intern 1</th><th>Intern 2</th><th>Facilitators</th><th>IBA/Professor</th></tr></thead>
+    <tbody>
+      <tr><td>School visits &amp; workshops</td><td><span class="br br-a">A</span></td><td><span class="br br-r">R</span></td><td><span class="br br-r">R</span></td><td><span class="br br-i">I</span></td><td><span class="br br-c">C</span></td></tr>
+      <tr><td>Eligibility screening</td><td><span class="br br-a">A</span></td><td><span class="br br-r">R</span></td><td><span class="br br-c">C</span></td><td><span class="br br-i">I</span></td><td><span class="br br-i">I</span></td></tr>
+      <tr><td>Parent engagement</td><td><span class="br br-r">R</span></td><td><span class="br br-c">C</span></td><td><span class="br br-r">R</span></td><td><span class="br br-i">I</span></td><td><span class="br br-a">A</span></td></tr>
+      <tr><td>Transport management</td><td><span class="br br-a">A</span></td><td><span class="br br-r">R</span></td><td><span class="br br-i">I</span></td><td><span class="br br-i">I</span></td><td><span class="br br-i">I</span></td></div></tr>
+      <tr><td>Workshop delivery</td><td><span class="br br-c">C</span></td><td><span class="br br-i">I</span></td><td><span class="br br-i">I</span></td><td><span class="br br-r">R</span></td><td><span class="br br-a">A</span></td></tr>
+      <tr><td>Attendance &amp; assignments</td><td><span class="br br-c">C</span></td><td><span class="br br-r">R</span></td><td><span class="br br-a">A</span></td><td><span class="br br-r">R</span></td><td><span class="br br-i">I</span></td></tr>
+      <tr><td>Mock exam coordination</td><td><span class="br br-a">A</span></td><td><span class="br br-r">R</span></td><td><span class="br br-c">C</span></td><td><span class="br br-r">R</span></td><td><span class="br br-c">C</span></td></tr>
+      <tr><td>Exam day logistics</td><td><span class="br br-a">A</span></td><td><span class="br br-r">R</span></td><td><span class="br br-r">R</span></td><td><span class="br br-i">I</span></td><td><span class="br br-c">C</span></td></tr>
+      <tr><td>Budget &amp; reporting</td><td><span class="br br-a">A</span></td><td><span class="br br-i">I</span></td><td><span class="br br-i">I</span></td><td><span class="br br-i">I</span></td><td><span class="br br-c">C</span></td></tr>
+    </tbody>
+  </table>
+  <div style="display:flex;gap:14px;font-size:9.5px;color:#555;"><span><span class="br br-r">R</span> Responsible</span><span><span class="br br-a">A</span> Accountable</span><span><span class="br br-c">C</span> Consulted</span><span><span class="br br-i">I</span> Informed</span></div>
+  <div class="pfoot"><div class="pft">Hafsa Yaseen &middot; PM Portfolio &middot; IBA Mathematics Entrance Exam Preparation 2023</div><div class="pfn">Page 5</div></div>
+</div>
+</div>
+
+<!-- PAGE 6: BUDGET -->
+<div class="page">
+<div class="inner">
+  <div class="ph"><div><div class="pnb">Section 05 &middot; Budget &amp; Resource Management</div><div class="pt">Budget &amp; Resource Management</div><div class="ps">Cost breakdown, funding sources, transport logistics, and variance tracking</div></div><div class="plogo">HAFSA YASEEN &middot; PM PORTFOLIO</div></div>
+
+  <div class="st">Budget overview</div>
+  <p class="prose">The programme was <strong>fully funded by IBA</strong>, which covered all direct costs including venue, transport, facilitator fees, exam costs, and food provision for exam day. Pak Alliance contributed staff time (Hafsa and the two interns). The programme coordinator's role included managing all IBA-allocated expenditure, ensuring funds were disbursed correctly, and reporting spend back to IBA throughout the project.</p>
+
+  <div class="st">Detailed budget breakdown</div>
+  <table class="bt">
+    <thead><tr><th>Cost Category</th><th>Details</th><th>Rate (PKR)</th><th>Duration</th><th>Total (est. PKR)</th><th>Funder</th></tr></thead>
+    <tbody>
+      <tr><td>Facilitator stipends</td><td>4 facilitators (2 per batch)</td><td>20,000–25,000/month</td><td>2 months (May–Jun)</td><td>160,000–200,000</td><td>IBA</td></tr>
+      <tr><td>Intern stipends</td><td>2 interns</td><td>20,000–25,000/month</td><td>4 months (Apr–Jul)</td><td>160,000–200,000</td><td>Pak Alliance</td></tr>
+      <tr><td>Student transport</td><td>IBA buses, 6 schools, both batches daily</td><td>Per route/day</td><td>8 weeks</td><td>Largest cost line</td><td>IBA</td></tr>
+      <tr><td>Learning materials</td><td>Worksheets, mock exam papers, study packs</td><td>Per student</td><td>One-time</td><td>~30,000–50,000</td><td>IBA</td></tr>
+      <tr><td>Exam day food provision</td><td>Meals for 80 girls on exam day</td><td>Per head</td><td>1 day</td><td>~20,000–30,000</td><td>IBA</td></tr>
+      <tr><td>Venue (IBA campus)</td><td>2 classrooms, 3x/week, 8 weeks</td><td>—</td><td>8 weeks</td><td>In-kind (IBA)</td><td>IBA</td></tr>
+      <tr><td>Exam fees</td><td>80 students × IBA exam fee</td><td>Per student</td><td>1 exam</td><td>Covered by IBA</td><td>IBA</td></tr>
+    </tbody>
+    <tfoot><tr><td colspan="4">Total programme cost</td><td>IBA-funded (full)</td><td>IBA + Pak Alliance</td></tr></tfoot>
+  </table>
+
+  <div class="st">Resource acquisition plan</div>
+  <div class="g4" style="margin-bottom:18px;">
+    <div style="background:#0f1f3d;border-radius:6px;padding:11px;text-align:center;"><div style="font-size:9px;font-weight:700;color:#4a9eff;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px;">1. Planning</div><div style="font-size:9.5px;color:#a0bcd8;line-height:1.55;">Identify &amp; agree transport vendor. Recruit facilitators. Procure materials.</div></div>
+    <div style="background:#1a3158;border-radius:6px;padding:11px;text-align:center;"><div style="font-size:9px;font-weight:700;color:#4a9eff;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px;">2. Initiating</div><div style="font-size:9.5px;color:#a0bcd8;line-height:1.55;">Confirm contracts. Onboard facilitators. Print worksheets. Brief transport vendor.</div></div>
+    <div style="background:#243e6a;border-radius:6px;padding:11px;text-align:center;"><div style="font-size:9px;font-weight:700;color:#4a9eff;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px;">3. Executing</div><div style="font-size:9.5px;color:#a0bcd8;line-height:1.55;">Daily transport operations. Monthly facilitator payments. Fortnightly spend reviews.</div></div>
+    <div style="background:#2e4d82;border-radius:6px;padding:11px;text-align:center;"><div style="font-size:9px;font-weight:700;color:#4a9eff;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px;">4. Closing</div><div style="font-size:9.5px;color:#a0bcd8;line-height:1.55;">Exam day food vendor. Final cost reconciliation. Variance report submitted to IBA.</div></div>
+  </div>
+
+  <div class="st">Transport management</div>
+  <p class="prose">Transport was the most operationally complex element of the budget. IBA funded buses to collect girls from all 6 schools and return them after sessions — critical to achieving high attendance from a population where independent travel raised safety concerns. <strong>Hafsa liaised daily with the transport vendor</strong>, coordinating schedules for Batch 1 (morning) and Batch 2 (afternoon), managing changes, and ensuring the vendor was briefed on the special exam day requirements at least one week in advance.</p>
+
+  <div class="pfoot"><div class="pft">Hafsa Yaseen &middot; PM Portfolio &middot; IBA Mathematics Entrance Exam Preparation 2023</div><div class="pfn">Page 6</div></div>
+</div>
+</div>
+
+<!-- PAGE 7: STAKEHOLDER & COMMS -->
+<div class="page">
+<div class="inner">
+  <div class="ph"><div><div class="pnb">Section 06 &middot; Stakeholder &amp; Communications</div><div class="pt">Stakeholder &amp; Communications Management</div><div class="ps">Stakeholder register, communication plans, and conflict resolution</div></div><div class="plogo">HAFSA YASEEN &middot; PM PORTFOLIO</div></div>
+
+  <div class="st">Stakeholder register</div>
+  <table class="rt" style="margin-bottom:18px;">
+    <thead><tr><th>Stakeholder</th><th>Type</th><th>Interest</th><th>Influence</th><th>Engagement strategy</th></tr></thead>
+    <tbody>
+      <tr><td>IBA Karachi</td><td>Funding partner</td><td>Exam uptake; quality candidates</td><td>High</td><td>Bi-weekly reports; pre-exam briefing; post-exam outcomes</td></tr>
+      <tr><td>Pak Alliance Leadership</td><td>Implementing org.</td><td>Delivery; programme reputation</td><td>High</td><td>Weekly updates; escalation as needed; final report</td></tr>
+      <tr><td>Government Schools (×6)</td><td>Partner / venue</td><td>Student success; minimal disruption</td><td>Medium</td><td>Monthly meetings; 48hr notice for schedule changes</td></tr>
+      <tr><td>Parents &amp; Guardians</td><td>Community</td><td>Daughter safety; opportunity</td><td>High</td><td>School meetings in Sindhi/Urdu; monthly updates; pre-exam briefing</td></tr>
+      <tr><td>IBA Professor</td><td>Academic lead</td><td>Curriculum delivery; student outcomes</td><td>High</td><td>Weekly check-in; session quality review; mock exam coordination</td></tr>
+      <tr><td>University Facilitators (×4)</td><td>Delivery team</td><td>Stipend; meaningful experience</td><td>Medium</td><td>Weekly WhatsApp check-ins; formal sit-down when issues arose</td></tr>
+      <tr><td>Transport Vendor</td><td>Supplier</td><td>Timely payment; contract renewal</td><td>Medium</td><td>Daily coordination; issues flagged same day</td></tr>
+      <tr><td>Food Vendor (Exam Day)</td><td>Supplier</td><td>Payment; smooth event</td><td>Low</td><td>Confirmed 1 week prior; invoice processed same day</td></tr>
+    </tbody>
+  </table>
+
+  <div class="st">Communication plans</div>
+  <div class="cgrid">
+    <div class="cc"><div class="cct">IBA</div><div class="ccb">Bi-weekly written progress reports. Pre-exam cohort readiness briefing. Exam day logistics shared 1 week prior. Post-exam outcomes report. Channel: Formal email + meetings.</div></div>
+    <div class="cc"><div class="cct">Pak Alliance Leadership</div><div class="ccb">Weekly status updates. Budget variance flagged fortnightly. Risk/issues escalated promptly. Final report within 2 weeks of exam. Channel: Email + weekly meetings.</div></div>
+    <div class="cc"><div class="cct">Government Schools</div><div class="ccb">Monthly principal meetings. Student roster updates. Schedule changes notified 48hrs prior. Channel: In-person + phone calls.</div></div>
+    <div class="cc"><div class="cct">Parents</div><div class="ccb">Initial session in Sindhi + Urdu. Monthly progress updates via school contact. Exam date and transport confirmed 2 weeks prior. Channel: School meetings + phone.</div></div>
+    <div class="cc"><div class="cct">Facilitators</div><div class="ccb">Weekly WhatsApp check-in on delivery. Attendance and assignment data after each session. Formal conversations when responsiveness issues arose. Channel: WhatsApp + in-person.</div></div>
+    <div class="cc"><div class="cct">Vendors (Transport &amp; Food)</div><div class="ccb">Transport: daily scheduling coordination; issues flagged same day. Food vendor: confirmed 1 week before exam. Invoices processed on schedule. Channel: Phone + WhatsApp.</div></div>
+  </div>
+
+  <div class="pfoot"><div class="pft">Hafsa Yaseen &middot; PM Portfolio &middot; IBA Mathematics Entrance Exam Preparation 2023</div><div class="pfn">Page 7</div></div>
+</div>
+</div>
+
+<!-- PAGE 8: RISK MANAGEMENT & PIM -->
+<div class="page">
+<div class="inner">
+  <div class="ph"><div><div class="pnb">Section 07 &middot; Risk Management</div><div class="pt">Risk Management</div><div class="ps">Risk identification, probability/impact matrix, and response planning</div></div><div class="plogo">HAFSA YASEEN &middot; PM PORTFOLIO</div></div>
+
+  <div class="g2" style="margin-bottom:18px;">
+    <div>
+      <div class="st">Probability &amp; Impact Matrix</div>
+      <div style="margin-bottom:8px;">
+      <table class="pim">
+        <tr>
+          <td class="pim-axis" style="width:60px;"></td>
+          <td class="pim-axis">Low<br>Impact</td>
+          <td class="pim-axis">Med<br>Impact</td>
+          <td class="pim-axis">High<br>Impact</td>
+        </tr>
+        <tr>
+          <td class="pim-axis">High<br>Prob.</td>
+          <td class="pim-m">0.20</td>
+          <td class="pim-h">0.40</td>
+          <td class="pim-h">0.80</td>
+        </tr>
+        <tr>
+          <td class="pim-axis">Med<br>Prob.</td>
+          <td class="pim-l">0.10</td>
+          <td class="pim-m">0.20</td>
+          <td class="pim-h">0.40</td>
+        </tr>
+        <tr>
+          <td class="pim-axis">Low<br>Prob.</td>
+          <td class="pim-l">0.05</td>
+          <td class="pim-l">0.10</td>
+          <td class="pim-m">0.20</td>
+        </tr>
+      </table>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;font-size:9.5px;">
+        <span><span class="rh">HIGH</span> PIM &ge;0.40 &mdash; Mitigation + Avoidance</span>
+        <span><span class="rm">MEDIUM</span> PIM 0.20&ndash;0.39 &mdash; Bespoke response</span>
+        <span><span class="rl">LOW</span> PIM &lt;0.20 &mdash; Single strategy</span>
+      </div>
+    </div>
+    <div>
+      <div class="st">Areas of impact</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="card"><div class="card-title">Resources</div><div class="card-body">Facilitator and transport costs. Managed via IBA funding agreement and 10% contingency buffer.</div></div>
+        <div class="card"><div class="card-title">Schedule</div><div class="card-body">Fixed IBA exam date (July) — no float. Any delay in workshops or high dropout directly threatened the 80-exam-sitter target.</div></div>
+        <div class="card"><div class="card-title">Scope</div><div class="card-body">Community mobilization scope was fluid — parent resistance could expand engagement work. Managed via weekly reviews and waitlist.</div></div>
+        <div class="card"><div class="card-title">Quality</div><div class="card-body">Facilitator engagement and assignment quality monitored weekly. Low engagement ratings flagged to Hafsa for follow-up.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="st">Risk register</div>
+  <table class="rt">
+    <thead><tr><th style="width:22%;">Risk</th><th>Prob.</th><th>Impact</th><th>PIM</th><th>Owner</th><th>Response</th></tr></thead>
+    <tbody>
+      <tr><td>Parents withdraw consent</td><td>High</td><td>High</td><td><span class="rh">0.80</span></td><td>Lead</td><td><strong>Avoidance:</strong> Sindhi-language engagement; multiple touchpoints. <strong>Mitigation:</strong> Waitlist maintained per school — replacements confirmed within 48hrs.</td></tr>
+      <tr><td>Facilitator unresponsiveness</td><td>Med</td><td>High</td><td><span class="rh">0.40</span></td><td>Lead</td><td><strong>Mitigation (actual):</strong> Formal sit-down conversations; weekly check-in structure established; professor escalated for repeated issues.</td></tr>
+      <tr><td>Transport breakdown</td><td>Med</td><td>High</td><td><span class="rh">0.40</span></td><td>Intern 1</td><td><strong>Mitigation:</strong> Backup vendor identified at project start. 30-min schedule buffer. Daily confirmation calls to driver.</td></tr>
+      <tr><td>Student dropout</td><td>Med</td><td>Med</td><td><span class="rm">0.20</span></td><td>Intern 2</td><td><strong>Mitigation:</strong> Welfare check calls within 24hrs of absence. Waitlist activation. 5 dropouts occurred &mdash; managed via waitlist replacements.</td></tr>
+      <tr><td>Girls unsafe travelling</td><td>Low</td><td>High</td><td><span class="rm">0.20</span></td><td>Intern 1</td><td><strong>Avoidance:</strong> School-to-IBA buses only. Female chaperone on each bus. Schools selected for proximity to IBA.</td></tr>
+      <tr><td>Exam day logistics failure</td><td>Low</td><td>High</td><td><span class="rm">0.20</span></td><td>Lead</td><td><strong>Avoidance:</strong> Full exam day plan documented 2 weeks prior. All vendors confirmed 1 week prior. Hafsa on-site throughout.</td></tr>
+      <tr><td>Low exam uptake (&lt;80)</td><td>Low</td><td>Med</td><td><span class="rl">0.10</span></td><td>Lead</td><td><strong>Mitigation:</strong> Enrolled 150 to buffer dropout. Confidence-building in Weeks 7–8. Parent commitments re-confirmed final week.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="pfoot"><div class="pft">Hafsa Yaseen &middot; PM Portfolio &middot; IBA Mathematics Entrance Exam Preparation 2023</div><div class="pfn">Page 8</div></div>
+</div>
+</div>
+
+<!-- PAGE 9: MONITORING, ISSUE LOG & OUTCOMES -->
+<div class="page">
+<div class="inner">
+  <div class="ph"><div><div class="pnb">Section 08 &amp; 09 &middot; Monitoring, Control &amp; Outcomes</div><div class="pt">Monitoring, Control &amp; Outcomes</div><div class="ps">Status reports, issue log, variance analysis, and lessons learned</div></div><div class="plogo">HAFSA YASEEN &middot; PM PORTFOLIO</div></div>
+
+  <div class="g2" style="margin-bottom:18px;">
+    <div>
+      <div class="st">Monitoring tools</div>
+      <div class="card"><div class="card-title">Weekly status reports</div><div class="card-body">Issued by Hafsa to IBA and Pak Alliance leadership. Covered: attendance %, assignment completion rate, transport issues, budget variance, risk updates, and areas of concern.</div></div>
+      <div class="card"><div class="card-title">Attendance &amp; engagement log</div><div class="card-body">Facilitators recorded attendance every session and rated student engagement 1–5. Students below 3 for 2+ consecutive sessions flagged to Intern 2 for welfare check within 24hrs.</div></div>
+      <div class="card"><div class="card-title">Assignment tracking</div><div class="card-body">End-of-session assignments checked by facilitators. Completion rates compiled weekly. Students with persistent non-completion contacted by Intern 2 within 48hrs.</div></div>
+    </div>
+    <div>
+      <div class="st">Variance analysis (sample)</div>
+      <div style="background:#f8f8f6;border-radius:7px;padding:14px;font-size:11.5px;margin-bottom:12px;">
+        <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #eee;"><span style="color:#888;">Planned sessions (8 wks)</span><span style="font-weight:600;">24</span></div>
+        <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #eee;"><span style="color:#888;">Actual sessions delivered</span><span style="font-weight:600;color:#059669;">24 (100%)</span></div>
+        <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #eee;"><span style="color:#888;">Girls enrolled</span><span style="font-weight:600;">150</span></div>
+        <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #eee;"><span style="color:#888;">Dropouts (replaced from waitlist)</span><span style="font-weight:600;color:#d97706;">5</span></div>
+        <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #eee;"><span style="color:#888;">Sat entrance exam</span><span style="font-weight:600;color:#059669;">80</span></div>
+        <div style="display:flex;justify-content:space-between;padding:5px 0;"><span style="color:#888;">Budget variance</span><span style="font-weight:600;color:#059669;">On budget (IBA-funded)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="st">Issue log</div>
+  <table class="issue-log" style="margin-bottom:18px;">
+    <thead><tr><th>Issue</th><th>Date</th><th>Description</th><th>Action taken</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Facilitator unresponsiveness</td><td>May 2023</td><td>2 of 4 facilitators consistently slow to submit attendance/assignment data. Affecting weekly reporting accuracy.</td><td>Formal sit-down with expectations reset. Weekly WhatsApp check-in structure introduced. Escalated to professor for one repeat case.</td><td><span class="issue-resolved">RESOLVED</span></td></tr>
+      <tr><td>Last-minute parent refusals</td><td>April 2023</td><td>~Dozen parents withdrew consent at end of April citing caregiver responsibilities and safety concerns.</td><td>Waitlist activated. Replacement girls contacted, enrolled, and onboarded within 1 week. 150 target maintained.</td><td><span class="issue-resolved">RESOLVED</span></td></tr>
+      <tr><td>Student dropouts (×5)</td><td>May–Jun 2023</td><td>5 girls dropped out at different points — mix of family, caregiver, and personal reasons.</td><td>Intern 2 conducted welfare calls. Waitlist replacements activated where sessions not too far advanced. Exam target of 80 maintained.</td><td><span class="issue-resolved">RESOLVED</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="st">Final outcomes</div>
+  <div class="oban">
+    <div class="op">The programme achieved every objective set at initiation. 150 girls from 6 Karachi government schools completed 8 weeks of intensive mathematics preparation. 80 girls sat the IBA entrance examination in July 2023 — many of them the first in their families ever to sit a university entrance exam. The programme proved so successful it was run again in 2024. It demonstrated that girls from the most under-resourced communities, when given aspiration, preparation, transport, and consistent support, can reach for the most prestigious universities in Pakistan.</div>
+    <div class="osts">
+      <div class="ost"><div class="osv">150</div><div class="osl">Girls enrolled</div></div>
+      <div class="ost"><div class="osv">6</div><div class="osl">Schools engaged</div></div>
+      <div class="ost"><div class="osv">80</div><div class="osl">Sat IBA exam</div></div>
+      <div class="ost"><div class="osv">100%</div><div class="osl">Sessions delivered</div></div>
+      <div class="ost"><div class="osv">2024</div><div class="osl">Programme repeated</div></div>
+    </div>
+  </div>
+
+  <div class="st">Lessons learned</div>
+  <div class="lc"><div class="ln">1</div><div><div class="lt">Language access is a non-negotiable in community programmes</div><div class="lb">Without a Sindhi-speaking team member, a large portion of parents could not have been engaged. Build linguistic access into every community-facing team from the start.</div></div></div>
+  <div class="lc"><div class="ln">2</div><div><div class="lt">Waitlists are a project management tool, not just a courtesy</div><div class="lb">Maintaining a screened waitlist per school allowed the team to replace last-minute refusals and dropouts without disrupting programme numbers. Over-recruitment was deliberate, not accidental.</div></div></div>
+  <div class="lc"><div class="ln">3</div><div><div class="lt">Contracted team members need formal accountability structures</div><div class="lb">University facilitators who were otherwise unresponsive became reliable once formal check-ins and clear expectations were established in writing. Informal assumptions do not hold in complex programmes.</div></div></div>
+  <div class="lc"><div class="ln">4</div><div><div class="lt">Operational logistics make or break community programmes</div><div class="lb">Transport was the single biggest enabler of attendance. When buses ran reliably, girls came. Vendor management, backup planning, and daily coordination were as important as the academic content.</div></div></div>
+
+  <div class="pfoot"><div class="pft">Hafsa Yaseen &middot; PM Portfolio &middot; IBA Mathematics Entrance Exam Preparation 2023</div><div class="pfn">Page 9</div></div>
+</div>
+</div>
+
+</body>
+</html>

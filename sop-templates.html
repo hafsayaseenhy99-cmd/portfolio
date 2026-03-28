@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOP & Process Template Library — Hafsa Yaseen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --font-sans: 'Manrope', sans-serif;
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f5f5f2;
+  --color-background-info: #eff6ff;
+  --color-background-warning: #fef3c7;
+  --color-background-success: #f0fdf4;
+  --color-background-danger: #fee2e2;
+  --color-text-primary: #0e0e0e;
+  --color-text-secondary: #555;
+  --color-text-tertiary: #999;
+  --color-text-info: #1e40af;
+  --color-text-warning: #92400e;
+  --color-text-success: #166534;
+  --color-text-danger: #991b1b;
+  --color-border-primary: #c0c0b8;
+  --color-border-secondary: #d0d0c8;
+  --color-border-tertiary: #e8e8e4;
+  --border-radius-lg: 10px;
+  --border-radius-md: 6px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans,'Manrope',sans-serif);background:#f5f5f3;padding:32px;max-width:960px;margin:0 auto;}
+.library-header{margin-bottom:28px;}
+.lib-label{font-size:10px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;}
+.lib-title{font-size:22px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px;}
+.lib-sub{font-size:13px;color:var(--color-text-secondary);line-height:1.6;}
+.category{margin-bottom:28px;}
+.cat-label{font-size:10px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;padding-bottom:8px;border-bottom:0.5px solid var(--color-border-tertiary);}
+.template-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+.template-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:16px;}
+.tc-badge{display:inline-block;font-size:10px;font-weight:500;padding:3px 9px;border-radius:var(--border-radius-md);margin-bottom:10px;}
+.tc-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:5px;}
+.tc-desc{font-size:11px;color:var(--color-text-secondary);line-height:1.55;margin-bottom:10px;}
+.tc-meta{display:flex;gap:8px;flex-wrap:wrap;}
+.tc-tag{font-size:10px;color:var(--color-text-tertiary);background:var(--color-background-secondary);padding:2px 7px;border-radius:var(--border-radius-md);}
+.template-full{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);margin-bottom:24px;overflow:hidden;}
+.tf-header{padding:18px 22px;border-bottom:0.5px solid var(--color-border-tertiary);}
+.tf-badge{display:inline-block;font-size:10px;font-weight:500;padding:3px 9px;border-radius:var(--border-radius-md);margin-bottom:8px;}
+.tf-title{font-size:15px;font-weight:500;color:var(--color-text-primary);margin-bottom:3px;}
+.tf-sub{font-size:11px;color:var(--color-text-secondary);}
+.tf-body{padding:18px 22px;}
+.tf-section{margin-bottom:16px;}
+.tf-section:last-child{margin-bottom:0;}
+.tf-section-label{font-size:10px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;}
+.field-row{display:flex;gap:12px;margin-bottom:8px;}
+.field{flex:1;}
+.field-label{font-size:10px;color:var(--color-text-tertiary);margin-bottom:3px;}
+.field-input{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:8px 10px;font-size:12px;color:var(--color-text-secondary);width:100%;font-family:var(--font-sans);}
+.field-input.tall{min-height:52px;}
+.step-row{display:flex;gap:10px;margin-bottom:8px;align-items:flex-start;}
+.step-n{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0;margin-top:1px;background:var(--color-background-secondary);color:var(--color-text-secondary);}
+.step-fields{flex:1;display:flex;gap:8px;}
+.step-field{flex:1;}
+.divider{height:0.5px;background:var(--color-border-tertiary);margin:14px 0;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+.raci-table{width:100%;border-collapse:collapse;font-size:11px;}
+.raci-table th{background:var(--color-background-secondary);color:var(--color-text-secondary);padding:7px 9px;font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:0.06em;text-align:left;border-bottom:0.5px solid var(--color-border-tertiary);}
+.raci-table td{padding:7px 9px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary);font-size:11px;}
+.raci-table td:first-child{color:var(--color-text-primary);}
+.note{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px;font-size:11px;color:var(--color-text-secondary);line-height:1.6;font-style:italic;}
+.site-nav{position:sticky;top:0;z-index:100;height:60px;background:#f5f5f3;display:flex;align-items:center;justify-content:space-between;padding:0 40px;border-bottom:1px solid rgba(0,0,0,0.07);font-family:'Manrope',sans-serif;}
+.site-nav-logo{font-weight:700;font-size:15px;letter-spacing:-0.01em;color:#0e0e0e;text-decoration:none;}
+.site-nav-center{display:flex;gap:32px;}
+.site-nav-link{font-size:14px;font-weight:500;color:#666;transition:color 0.18s;text-decoration:none;}
+.site-nav-link:hover{color:#0e0e0e;}
+.site-nav-right{display:flex;gap:16px;align-items:center;}
+.site-nav-icon{color:#666;transition:color 0.18s;display:flex;align-items:center;text-decoration:none;}
+.site-nav-icon:hover{color:#0e0e0e;}
+</style>
+
+<nav class="site-nav">
+  <a class="site-nav-logo" href="/">Hafsa Yaseen</a>
+  <div class="site-nav-center">
+    <a href="/#work" class="site-nav-link">Work</a>
+    <a href="/about.html" class="site-nav-link">About</a>
+    <a href="/experience.html" class="site-nav-link">Experience</a>
+  </div>
+  <div class="site-nav-right">
+    <a class="site-nav-icon" href="https://www.linkedin.com/in/-hafsa-yaseen/" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+  </div>
+</nav>
+
+<div class="library-header">
+  <div class="lib-label">Flow Candy · Operations · Created by Hafsa Yaseen</div>
+  <div class="lib-title">SOP &amp; process template library</div>
+  <div class="lib-sub">A collection of reusable process templates for operations, HR, project management, and automation. Created to standardise workflows and reduce manual effort across teams.</div>
+</div>
+
+<div class="category">
+  <div class="cat-label">Template index</div>
+  <div class="template-grid">
+    <div class="template-card">
+      <div class="tc-badge" style="background:var(--color-background-info);color:var(--color-text-info);">TPL-001</div>
+      <div class="tc-title">SOP master template</div>
+      <div class="tc-desc">Blank SOP template for any process. Includes purpose, scope, steps, roles, and review cycle.</div>
+      <div class="tc-meta"><div class="tc-tag">All teams</div><div class="tc-tag">Any process</div></div>
+    </div>
+    <div class="template-card">
+      <div class="tc-badge" style="background:var(--color-background-warning);color:var(--color-text-warning);">TPL-002</div>
+      <div class="tc-title">RACI matrix template</div>
+      <div class="tc-desc">Stakeholder accountability framework. Maps every activity to Responsible, Accountable, Consulted, and Informed parties.</div>
+      <div class="tc-meta"><div class="tc-tag">PM</div><div class="tc-tag">Cross-functional</div></div>
+    </div>
+    <div class="template-card">
+      <div class="tc-badge" style="background:var(--color-background-success);color:var(--color-text-success);">TPL-003</div>
+      <div class="tc-title">Project kickoff checklist</div>
+      <div class="tc-desc">Everything to confirm before a project begins. Covers scope, team, tools, risks, and communication plan.</div>
+      <div class="tc-meta"><div class="tc-tag">PM</div><div class="tc-tag">Initiation</div></div>
+    </div>
+    <div class="template-card">
+      <div class="tc-badge" style="background:var(--color-background-danger);color:var(--color-text-danger);">TPL-004</div>
+      <div class="tc-title">Risk register template</div>
+      <div class="tc-desc">Log risks, assess probability and impact, assign owners, and document response strategies.</div>
+      <div class="tc-meta"><div class="tc-tag">PM</div><div class="tc-tag">Risk</div></div>
+    </div>
+    <div class="template-card">
+      <div class="tc-badge" style="background:var(--color-background-info);color:var(--color-text-info);">TPL-005</div>
+      <div class="tc-title">Automation mapping template</div>
+      <div class="tc-desc">Document any automation workflow — trigger, action, tool, and outcome. Works for Zapier, ClickUp, or any tool.</div>
+      <div class="tc-meta"><div class="tc-tag">Automation</div><div class="tc-tag">Ops</div></div>
+    </div>
+    <div class="template-card">
+      <div class="tc-badge" style="background:var(--color-background-warning);color:var(--color-text-warning);">TPL-006</div>
+      <div class="tc-title">Issue log template</div>
+      <div class="tc-desc">Track issues, assign owners, record actions taken, and mark resolution status throughout a project.</div>
+      <div class="tc-meta"><div class="tc-tag">PM</div><div class="tc-tag">Monitoring</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="template-full">
+  <div class="tf-header">
+    <div class="tf-badge" style="background:var(--color-background-info);color:var(--color-text-info);">TPL-001 · SOP master template</div>
+    <div class="tf-title">Standard operating procedure</div>
+    <div class="tf-sub">Fill in each section. Review quarterly or when the process changes.</div>
+  </div>
+  <div class="tf-body">
+    <div class="tf-section">
+      <div class="tf-section-label">Document details</div>
+      <div class="three-col">
+        <div class="field"><div class="field-label">SOP title</div><div class="field-input">[Process name]</div></div>
+        <div class="field"><div class="field-label">SOP ID</div><div class="field-input">SOP-00X</div></div>
+        <div class="field"><div class="field-label">Version</div><div class="field-input">v1.0</div></div>
+      </div>
+      <div class="three-col" style="margin-top:8px;">
+        <div class="field"><div class="field-label">Owner</div><div class="field-input">[Name / team]</div></div>
+        <div class="field"><div class="field-label">Created date</div><div class="field-input">[DD/MM/YYYY]</div></div>
+        <div class="field"><div class="field-label">Review cycle</div><div class="field-input">Quarterly / Bi-annual</div></div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="tf-section">
+      <div class="tf-section-label">Purpose &amp; scope</div>
+      <div class="field"><div class="field-label">Purpose — why does this process exist?</div><div class="field-input tall">[Describe the problem this SOP solves and what it enables]</div></div>
+      <div class="two-col" style="margin-top:8px;">
+        <div class="field"><div class="field-label">Applies to</div><div class="field-input">[Teams / roles this SOP covers]</div></div>
+        <div class="field"><div class="field-label">Does not apply to</div><div class="field-input">[Any exclusions or exceptions]</div></div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="tf-section">
+      <div class="tf-section-label">Process steps</div>
+      <div class="step-row">
+        <div class="step-n">1</div>
+        <div class="step-fields">
+          <div class="step-field"><div class="field-label">Step title</div><div class="field-input">[What happens]</div></div>
+          <div class="step-field"><div class="field-label">Tool / system</div><div class="field-input">[ClickUp / Slack / etc.]</div></div>
+          <div class="step-field"><div class="field-label">Owner</div><div class="field-input">[Role]</div></div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-n">2</div>
+        <div class="step-fields">
+          <div class="step-field"><div class="field-label">Step title</div><div class="field-input">[What happens]</div></div>
+          <div class="step-field"><div class="field-label">Tool / system</div><div class="field-input">[ClickUp / Slack / etc.]</div></div>
+          <div class="step-field"><div class="field-label">Owner</div><div class="field-input">[Role]</div></div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-n">3</div>
+        <div class="step-fields">
+          <div class="step-field"><div class="field-label">Step title</div><div class="field-input">[What happens]</div></div>
+          <div class="step-field"><div class="field-label">Tool / system</div><div class="field-input">[ClickUp / Slack / etc.]</div></div>
+          <div class="step-field"><div class="field-label">Owner</div><div class="field-input">[Role]</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="tf-section">
+      <div class="tf-section-label">Roles &amp; responsibilities</div>
+      <table class="raci-table">
+        <thead><tr><th>Activity</th><th>Responsible (R)</th><th>Accountable (A)</th><th>Consulted (C)</th><th>Informed (I)</th></tr></thead>
+        <tbody>
+          <tr><td>[Step 1]</td><td>[Role]</td><td>[Role]</td><td>[Role]</td><td>[Role]</td></tr>
+          <tr><td>[Step 2]</td><td>[Role]</td><td>[Role]</td><td>[Role]</td><td>[Role]</td></tr>
+          <tr><td>[Step 3]</td><td>[Role]</td><td>[Role]</td><td>[Role]</td><td>[Role]</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="divider"></div>
+    <div class="tf-section">
+      <div class="tf-section-label">Expected outcomes</div>
+      <div class="two-col">
+        <div class="field"><div class="field-label">What success looks like</div><div class="field-input tall">[What should be true when this process is followed correctly]</div></div>
+        <div class="field"><div class="field-label">Common failure points to watch</div><div class="field-input tall">[Where things typically go wrong and what to check]</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="template-full">
+  <div class="tf-header">
+    <div class="tf-badge" style="background:var(--color-background-info);color:var(--color-text-info);">TPL-005 · Automation mapping template</div>
+    <div class="tf-title">Automation workflow documentation</div>
+    <div class="tf-sub">Use this to document any automation — Zapier, ClickUp, GoHighLevel, or any tool.</div>
+  </div>
+  <div class="tf-body">
+    <div class="tf-section">
+      <div class="tf-section-label">Automation overview</div>
+      <div class="three-col">
+        <div class="field"><div class="field-label">Automation name</div><div class="field-input">[Descriptive name]</div></div>
+        <div class="field"><div class="field-label">Tool(s) used</div><div class="field-input">Zapier / ClickUp / GHL</div></div>
+        <div class="field"><div class="field-label">Built by</div><div class="field-input">[Name]</div></div>
+      </div>
+      <div class="two-col" style="margin-top:8px;">
+        <div class="field"><div class="field-label">Problem this solves</div><div class="field-input tall">[What manual task does this replace? How long did it take before?]</div></div>
+        <div class="field"><div class="field-label">Expected outcome</div><div class="field-input tall">[What happens automatically now? What time/effort does this save?]</div></div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="tf-section">
+      <div class="tf-section-label">Trigger → action chain</div>
+      <div class="note" style="margin-bottom:10px;">Document each step in the automation sequence: what triggers it, what each action does, and which tool performs it.</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;gap:10px;align-items:center;">
+          <div style="background:var(--color-background-info);color:var(--color-text-info);border-radius:var(--border-radius-md);padding:4px 10px;font-size:10px;font-weight:500;flex-shrink:0;">Trigger</div>
+          <div class="field-input" style="flex:1;">[What event starts this automation? e.g. "New form submission in GHL"]</div>
+          <div style="font-size:10px;color:var(--color-text-tertiary);flex-shrink:0;width:60px;">Tool: [GHL]</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <div style="background:var(--color-background-secondary);color:var(--color-text-secondary);border-radius:var(--border-radius-md);padding:4px 10px;font-size:10px;font-weight:500;flex-shrink:0;">Action 1</div>
+          <div class="field-input" style="flex:1;">[What happens next? e.g. "Zapier creates a new task in ClickUp"]</div>
+          <div style="font-size:10px;color:var(--color-text-tertiary);flex-shrink:0;width:60px;">Tool: [Zapier]</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <div style="background:var(--color-background-secondary);color:var(--color-text-secondary);border-radius:var(--border-radius-md);padding:4px 10px;font-size:10px;font-weight:500;flex-shrink:0;">Action 2</div>
+          <div class="field-input" style="flex:1;">[e.g. "Slack notification sent to #ops-updates with task link"]</div>
+          <div style="font-size:10px;color:var(--color-text-tertiary);flex-shrink:0;width:60px;">Tool: [Slack]</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <div style="background:var(--color-background-success);color:var(--color-text-success);border-radius:var(--border-radius-md);padding:4px 10px;font-size:10px;font-weight:500;flex-shrink:0;">Outcome</div>
+          <div class="field-input" style="flex:1;">[What is the end state? e.g. "Task assigned, team notified, no manual input required"]</div>
+          <div style="font-size:10px;color:var(--color-text-tertiary);flex-shrink:0;width:60px;">Auto</div>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="tf-section">
+      <div class="tf-section-label">Impact measurement</div>
+      <div class="three-col">
+        <div class="field"><div class="field-label">Time saved per week</div><div class="field-input">[e.g. 3 hours/week]</div></div>
+        <div class="field"><div class="field-label">Manual steps eliminated</div><div class="field-input">[e.g. 5 manual steps → 0]</div></div>
+        <div class="field"><div class="field-label">Error rate change</div><div class="field-input">[e.g. Reduced to near zero]</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="template-full">
+  <div class="tf-header">
+    <div class="tf-badge" style="background:var(--color-background-danger);color:var(--color-text-danger);">TPL-004 · Risk register template</div>
+    <div class="tf-title">Risk register</div>
+    <div class="tf-sub">Log risks at project start. Review weekly. Update status as risks change.</div>
+  </div>
+  <div class="tf-body">
+    <div class="tf-section">
+      <div class="tf-section-label">Project details</div>
+      <div class="three-col">
+        <div class="field"><div class="field-label">Project name</div><div class="field-input">[Project name]</div></div>
+        <div class="field"><div class="field-label">Risk owner</div><div class="field-input">[Name / role]</div></div>
+        <div class="field"><div class="field-label">Last reviewed</div><div class="field-input">[DD/MM/YYYY]</div></div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="tf-section">
+      <div class="tf-section-label">Risk log</div>
+      <table class="raci-table">
+        <thead><tr><th>Risk description</th><th>Probability</th><th>Impact</th><th>Owner</th><th>Response strategy</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>[Describe risk]</td><td>High / Med / Low</td><td>High / Med / Low</td><td>[Role]</td><td>[Avoid / Mitigate / Accept / Transfer]</td><td>Open / Resolved</td></tr>
+          <tr><td>[Describe risk]</td><td>High / Med / Low</td><td>High / Med / Low</td><td>[Role]</td><td>[Avoid / Mitigate / Accept / Transfer]</td><td>Open / Resolved</td></tr>
+          <tr><td>[Describe risk]</td><td>High / Med / Low</td><td>High / Med / Low</td><td>[Role]</td><td>[Avoid / Mitigate / Accept / Transfer]</td><td>Open / Resolved</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body></html>

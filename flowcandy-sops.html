@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flow Candy SOPs — Hafsa Yaseen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --font-sans: 'Manrope', sans-serif;
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f5f5f2;
+  --color-background-info: #eff6ff;
+  --color-background-warning: #fef3c7;
+  --color-background-success: #f0fdf4;
+  --color-background-danger: #fee2e2;
+  --color-text-primary: #0e0e0e;
+  --color-text-secondary: #555;
+  --color-text-tertiary: #999;
+  --color-text-info: #1e40af;
+  --color-text-warning: #92400e;
+  --color-text-success: #166534;
+  --color-text-danger: #991b1b;
+  --color-border-primary: #c0c0b8;
+  --color-border-secondary: #d0d0c8;
+  --color-border-tertiary: #e8e8e4;
+  --border-radius-lg: 10px;
+  --border-radius-md: 6px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans,'Manrope',sans-serif);background:#f5f5f3;padding:32px;max-width:960px;margin:0 auto;}
+.sop{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);margin-bottom:24px;overflow:hidden;}
+.sop-header{padding:20px 24px;border-bottom:0.5px solid var(--color-border-tertiary);}
+.sop-badge{display:inline-block;font-size:10px;font-weight:500;padding:3px 10px;border-radius:var(--border-radius-md);margin-bottom:10px;}
+.sop-title{font-size:16px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px;}
+.sop-meta{font-size:12px;color:var(--color-text-secondary);}
+.sop-meta span{margin-right:16px;}
+.sop-body{padding:20px 24px;}
+.sop-section{margin-bottom:18px;}
+.sop-section:last-child{margin-bottom:0;}
+.sop-section-title{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;}
+.purpose-box{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 14px;font-size:13px;color:var(--color-text-primary);line-height:1.6;}
+.steps{display:flex;flex-direction:column;gap:8px;}
+.step{display:flex;gap:12px;align-items:flex-start;}
+.step-num{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0;margin-top:1px;}
+.step-content{flex:1;}
+.step-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:2px;}
+.step-body{font-size:12px;color:var(--color-text-secondary);line-height:1.6;}
+.step-tool{display:inline-block;font-size:10px;font-weight:500;padding:2px 8px;border-radius:var(--border-radius-md);margin-top:4px;background:var(--color-background-secondary);color:var(--color-text-secondary);}
+.tags{display:flex;flex-wrap:wrap;gap:6px;}
+.tag{font-size:11px;padding:3px 10px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);color:var(--color-text-secondary);}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.info-item{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px;}
+.info-label{font-size:10px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:4px;}
+.info-val{font-size:12px;color:var(--color-text-primary);line-height:1.5;}
+.divider{height:0.5px;background:var(--color-border-tertiary);margin:16px 0;}
+.outcome-row{display:flex;gap:10px;margin-top:10px;}
+.outcome{flex:1;background:var(--color-background-success);border-radius:var(--border-radius-md);padding:10px 12px;}
+.outcome-label{font-size:10px;font-weight:500;color:var(--color-text-success);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:3px;}
+.outcome-val{font-size:12px;color:var(--color-text-success);line-height:1.5;}
+.site-nav{position:sticky;top:0;z-index:100;height:60px;background:#f5f5f3;display:flex;align-items:center;justify-content:space-between;padding:0 40px;border-bottom:1px solid rgba(0,0,0,0.07);font-family:'Manrope',sans-serif;}
+.site-nav-logo{font-weight:700;font-size:15px;letter-spacing:-0.01em;color:#0e0e0e;text-decoration:none;}
+.site-nav-center{display:flex;gap:32px;}
+.site-nav-link{font-size:14px;font-weight:500;color:#666;transition:color 0.18s;text-decoration:none;}
+.site-nav-link:hover{color:#0e0e0e;}
+.site-nav-right{display:flex;gap:16px;align-items:center;}
+.site-nav-icon{color:#666;transition:color 0.18s;display:flex;align-items:center;text-decoration:none;}
+.site-nav-icon:hover{color:#0e0e0e;}
+</style>
+
+<nav class="site-nav">
+  <a class="site-nav-logo" href="/">Hafsa Yaseen</a>
+  <div class="site-nav-center">
+    <a href="/#work" class="site-nav-link">Work</a>
+    <a href="/about.html" class="site-nav-link">About</a>
+    <a href="/experience.html" class="site-nav-link">Experience</a>
+  </div>
+  <div class="site-nav-right">
+    <a class="site-nav-icon" href="https://www.linkedin.com/in/-hafsa-yaseen/" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+  </div>
+</nav>
+
+<div style="margin-bottom:20px;">
+  <div style="font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Flow Candy · HR &amp; Operations</div>
+  <div style="font-size:20px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px;">Standard Operating Procedures</div>
+  <div style="font-size:13px;color:var(--color-text-secondary);">Created by Hafsa Yaseen · HR &amp; Operations Analyst · 2023</div>
+</div>
+
+<div class="sop">
+  <div class="sop-header">
+    <div class="sop-badge" style="background:var(--color-background-info);color:var(--color-text-info);">SOP-001 · Client Onboarding</div>
+    <div class="sop-title">New client onboarding process</div>
+    <div class="sop-meta">
+      <span>Owner: HR &amp; Ops</span>
+      <span>Tool: ClickUp + Slack</span>
+      <span>Review cycle: Quarterly</span>
+    </div>
+  </div>
+  <div class="sop-body">
+    <div class="sop-section">
+      <div class="sop-section-title">Purpose</div>
+      <div class="purpose-box">To ensure every new client is onboarded consistently, with full visibility across the team, clear task ownership, and no steps missed. Replaces ad hoc onboarding that previously caused delays and duplication.</div>
+    </div>
+    <div class="sop-section">
+      <div class="sop-section-title">Process steps</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num" style="background:var(--color-background-info);color:var(--color-text-info);">1</div>
+          <div class="step-content">
+            <div class="step-title">Create client folder in ClickUp</div>
+            <div class="step-body">Set up a new client space using the standard onboarding template. Assign team members to relevant tasks. Set due dates for each onboarding milestone.</div>
+            <div class="step-tool">ClickUp · Onboarding template</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--color-background-info);color:var(--color-text-info);">2</div>
+          <div class="step-content">
+            <div class="step-title">Send welcome pack and intro Slack message</div>
+            <div class="step-body">Use the standard welcome message template in Slack #client-onboarding channel. Tag the assigned account lead. Confirm client has received login credentials and access.</div>
+            <div class="step-tool">Slack · #client-onboarding</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--color-background-info);color:var(--color-text-info);">3</div>
+          <div class="step-content">
+            <div class="step-title">Complete intake form and add to CRM</div>
+            <div class="step-body">Record all client details in the intake form. Update GoHighLevel CRM with contact info, service tier, and account lead. Flag any special requirements in the client notes field.</div>
+            <div class="step-tool">GoHighLevel CRM</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--color-background-info);color:var(--color-text-info);">4</div>
+          <div class="step-content">
+            <div class="step-title">Schedule kickoff call and update ClickUp</div>
+            <div class="step-body">Book kickoff call within 3 business days of contract sign. Update ClickUp task status to "Kickoff scheduled." Notify team in Slack #ops-updates.</div>
+            <div class="step-tool">ClickUp · Slack · #ops-updates</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--color-background-info);color:var(--color-text-info);">5</div>
+          <div class="step-content">
+            <div class="step-title">Mark onboarding complete and archive</div>
+            <div class="step-body">Once all onboarding tasks are ticked off, mark the ClickUp project as complete. Move to "Active clients" folder. Post completion update in Slack #client-onboarding.</div>
+            <div class="step-tool">ClickUp · Slack</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="outcome-row">
+      <div class="outcome"><div class="outcome-label">Time saved</div><div class="outcome-val">Reduced onboarding time by eliminating ad hoc back-and-forth</div></div>
+      <div class="outcome"><div class="outcome-label">Key outcome</div><div class="outcome-val">Consistent client experience from day one, every time</div></div>
+      <div class="outcome"><div class="outcome-label">Adopted by</div><div class="outcome-val">Whole company — used for all new client onboarding</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="sop">
+  <div class="sop-header">
+    <div class="sop-badge" style="background:var(--color-background-warning);color:var(--color-text-warning);">SOP-002 · HR Operations</div>
+    <div class="sop-title">New hire onboarding &amp; offboarding process</div>
+    <div class="sop-meta">
+      <span>Owner: HR &amp; Ops</span>
+      <span>Tool: ClickUp + Slack</span>
+      <span>Review cycle: Bi-annual</span>
+    </div>
+  </div>
+  <div class="sop-body">
+    <div class="sop-section">
+      <div class="sop-section-title">Purpose</div>
+      <div class="purpose-box">To standardise the onboarding and offboarding of all Flow Candy team members, ensuring no steps are missed, access is correctly provisioned and removed, and every new hire has a consistent first-week experience.</div>
+    </div>
+    <div class="sop-section">
+      <div class="sop-section-title">Onboarding steps</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num" style="background:var(--color-background-warning);color:var(--color-text-warning);">1</div>
+          <div class="step-content">
+            <div class="step-title">Create ClickUp onboarding checklist</div>
+            <div class="step-body">Duplicate the standard new hire checklist template. Assign to HR lead and hiring manager. Set Day 1, Week 1, and Month 1 milestones.</div>
+            <div class="step-tool">ClickUp · New hire template</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--color-background-warning);color:var(--color-text-warning);">2</div>
+          <div class="step-content">
+            <div class="step-title">Provision system access</div>
+            <div class="step-body">Grant access to ClickUp, Slack, GoHighLevel, and any role-specific tools before Day 1. Confirm access with new hire via Slack DM on morning of first day.</div>
+            <div class="step-tool">ClickUp · Slack · GoHighLevel</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--color-background-warning);color:var(--color-text-warning);">3</div>
+          <div class="step-content">
+            <div class="step-title">Introduce in Slack #team channel</div>
+            <div class="step-body">Post a welcome message in #team using the standard intro template. Include role, start date, and who they report to. Ask team to respond with a welcome.</div>
+            <div class="step-tool">Slack · #team</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--color-background-warning);color:var(--color-text-warning);">4</div>
+          <div class="step-content">
+            <div class="step-title">Complete HR documentation</div>
+            <div class="step-body">Ensure signed contract, emergency contacts, and bank details are received within first 3 days. File in HR folder. Update team roster in ClickUp.</div>
+            <div class="step-tool">ClickUp · HR folder</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="sop-section">
+      <div class="sop-section-title">Offboarding steps</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num" style="background:var(--color-background-danger);color:var(--color-text-danger);">1</div>
+          <div class="step-content">
+            <div class="step-title">Notify team and update ClickUp</div>
+            <div class="step-body">Update ClickUp team roster. Reassign all open tasks to relevant team members. Notify in #ops-updates with last working day.</div>
+            <div class="step-tool">ClickUp · Slack · #ops-updates</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--color-background-danger);color:var(--color-text-danger);">2</div>
+          <div class="step-content">
+            <div class="step-title">Revoke all system access on last day</div>
+            <div class="step-body">Remove access to ClickUp, Slack, GoHighLevel, and all other tools on last working day. Confirm completion in ClickUp offboarding checklist.</div>
+            <div class="step-tool">ClickUp · All systems</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--color-background-danger);color:var(--color-text-danger);">3</div>
+          <div class="step-content">
+            <div class="step-title">Conduct exit documentation</div>
+            <div class="step-body">Complete exit paperwork. Archive HR records. Document any handover notes in ClickUp for the incoming team member or line manager.</div>
+            <div class="step-tool">ClickUp · HR folder</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sop">
+  <div class="sop-header">
+    <div class="sop-badge" style="background:var(--color-background-success);color:var(--color-text-success);">SOP-003 · Reporting &amp; Data</div>
+    <div class="sop-title">Weekly operations reporting process</div>
+    <div class="sop-meta">
+      <span>Owner: HR &amp; Ops</span>
+      <span>Tool: ClickUp + Slack</span>
+      <span>Cadence: Weekly (every Monday)</span>
+    </div>
+  </div>
+  <div class="sop-body">
+    <div class="sop-section">
+      <div class="sop-section-title">Purpose</div>
+      <div class="purpose-box">To ensure leadership has a consistent, accurate view of operational performance every week — covering task completion rates, workload distribution, and any blockers — without requiring manual data chasing across the team.</div>
+    </div>
+    <div class="sop-section">
+      <div class="sop-section-title">Process steps</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num" style="background:var(--color-background-success);color:var(--color-text-success);">1</div>
+          <div class="step-content">
+            <div class="step-title">Pull weekly ClickUp report (Monday 9am)</div>
+            <div class="step-body">Export task completion data from ClickUp for the previous week. Check overdue tasks, completion rates by team member, and workload distribution.</div>
+            <div class="step-tool">ClickUp · Reports dashboard</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--color-background-success);color:var(--color-text-success);">2</div>
+          <div class="step-content">
+            <div class="step-title">Update weekly ops tracker</div>
+            <div class="step-body">Enter key metrics into the weekly ops Excel tracker: tasks completed, tasks overdue, new tasks created, and any flagged blockers from the team.</div>
+            <div class="step-tool">Excel · Weekly ops tracker</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--color-background-success);color:var(--color-text-success);">3</div>
+          <div class="step-content">
+            <div class="step-title">Post summary in Slack #ops-updates</div>
+            <div class="step-body">Share a brief weekly summary using the standard format: tasks completed, tasks overdue, any blockers, and key priorities for the week ahead. Tag relevant team leads.</div>
+            <div class="step-tool">Slack · #ops-updates</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--color-background-success);color:var(--color-text-success);">4</div>
+          <div class="step-content">
+            <div class="step-title">Escalate blockers to leadership</div>
+            <div class="step-body">Any tasks overdue by 3+ days or flagged as blocked must be escalated to the relevant manager via Slack DM or ClickUp comment within 24hrs of the report.</div>
+            <div class="step-tool">Slack · ClickUp · @manager</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--color-background-success);color:var(--color-text-success);">5</div>
+          <div class="step-content">
+            <div class="step-title">Archive report and reset tracker</div>
+            <div class="step-body">Save completed weekly report to the ops archive folder. Reset the weekly tracker for the new week. Confirm archive complete in ClickUp.</div>
+            <div class="step-tool">ClickUp · Archive folder</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="outcome-row">
+      <div class="outcome"><div class="outcome-label">Key outcome</div><div class="outcome-val">Leadership has full operational visibility every Monday without chasing the team</div></div>
+      <div class="outcome"><div class="outcome-label">Part of</div><div class="outcome-val">75% manual workload reduction through systematic process design</div></div>
+    </div>
+  </div>
+</div>
+</body></html>
