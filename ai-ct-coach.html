@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Critical Thinking Coach — Hafsa Yaseen</title>
+  <meta name="description" content="A Socratic AI coach that challenges reasoning through real-world scenarios. Built with React, Claude API, and Netlify serverless functions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .cs-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 72px 40px 120px;
+    }
+
+    /* ── Back link ── */
+    .cs-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--mid);
+      text-decoration: none;
+      margin-bottom: 48px;
+      transition: color 0.15s;
+    }
+    .cs-back:hover { color: var(--black); }
+
+    /* ── Hero ── */
+    .cs-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .cs-badge {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      background: #f0f0ee;
+      color: #555;
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+    .cs-badge--live {
+      background: #dcfce7;
+      color: #166534;
+    }
+    .cs-live-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: #16a34a;
+      border-radius: 50%;
+      margin-right: 4px;
+    }
+    .cs-year {
+      font-size: 12px;
+      color: var(--light);
+    }
+
+    .cs-title {
+      font-size: clamp(30px, 5vw, 46px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      color: var(--black);
+    }
+
+    .cs-lead {
+      font-size: 17px;
+      color: var(--mid);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      max-width: 620px;
+    }
+
+    /* ── Meta strip ── */
+    .cs-meta {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 64px;
+      background: #fff;
+    }
+    .cs-meta-item {
+      padding: 20px 22px;
+      border-right: 1px solid rgba(0,0,0,0.07);
+    }
+    .cs-meta-item:last-child { border-right: none; }
+    .cs-meta-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--light);
+      margin-bottom: 5px;
+    }
+    .cs-meta-value {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--black);
+      line-height: 1.4;
+    }
+
+    /* ── Divider ── */
+    .cs-divider {
+      height: 1px;
+      background: rgba(0,0,0,0.07);
+      margin: 52px 0;
+    }
+
+    /* ── Section label ── */
+    .cs-section-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--light);
+      margin-bottom: 16px;
+    }
+
+    /* ── Section heading ── */
+    .cs-h2 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      margin-bottom: 14px;
+      line-height: 1.25;
+    }
+
+    /* ── Body prose ── */
+    .cs-p {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.78;
+      margin-bottom: 16px;
+    }
+    .cs-p:last-child { margin-bottom: 0; }
+    .cs-p strong { color: var(--black); font-weight: 700; }
+
+    /* ── Pull quote ── */
+    .cs-quote {
+      border-left: 3px solid var(--black);
+      padding: 6px 0 6px 22px;
+      margin: 32px 0;
+    }
+    .cs-quote p {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--black);
+      line-height: 1.55;
+      font-style: italic;
+    }
+
+    /* ── Feature grid ── */
+    .cs-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 28px 0;
+    }
+    .cs-feature {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 14px;
+      padding: 22px;
+    }
+    .cs-feature-icon {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    .cs-feature-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 6px;
+    }
+    .cs-feature-body {
+      font-size: 12.5px;
+      color: var(--mid);
+      line-height: 1.65;
+    }
+
+    /* ── Tech stack list ── */
+    .cs-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 20px 0;
+    }
+    .cs-stack-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--black);
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.09);
+      border-radius: 10px;
+      padding: 8px 14px;
+    }
+    .cs-stack-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── Architecture diagram ── */
+    .cs-arch {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 16px;
+      padding: 28px 28px 24px;
+      margin: 28px 0;
+    }
+    .cs-arch-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--light);
+      margin-bottom: 20px;
+    }
+    .cs-arch-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 12px;
+    }
+    .cs-arch-row:last-child { margin-bottom: 0; }
+    .cs-arch-box {
+      flex: 1;
+      background: #f5f5f3;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--black);
+      text-align: center;
+    }
+    .cs-arch-box--highlight {
+      background: #0e0e0e;
+      color: #fff;
+    }
+    .cs-arch-arrow {
+      width: 32px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--light);
+      flex-shrink: 0;
+    }
+    .cs-arch-sub {
+      font-size: 10px;
+      font-weight: 400;
+      color: #aaa;
+      margin-top: 2px;
+    }
+    .cs-arch-box--highlight .cs-arch-sub { color: #888; }
+
+    /* ── Difficulty table ── */
+    .cs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 13px;
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.07);
+    }
+    .cs-table th {
+      background: #f5f5f3;
+      padding: 11px 16px;
+      text-align: left;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--light);
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .cs-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      color: #444;
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .cs-table tr:last-child td { border-bottom: none; }
+    .cs-table td:first-child { font-weight: 700; color: var(--black); width: 120px; }
+
+    /* ── Reflection card ── */
+    .cs-reflection {
+      background: #0e0e0e;
+      color: #e8e4df;
+      border-radius: 16px;
+      padding: 32px 32px 28px;
+      margin: 32px 0;
+    }
+    .cs-reflection-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #666;
+      margin-bottom: 14px;
+    }
+    .cs-reflection p {
+      font-size: 14.5px;
+      line-height: 1.75;
+      color: #b0a898;
+    }
+    .cs-reflection p + p { margin-top: 12px; }
+    .cs-reflection strong { color: #e8e4df; font-weight: 700; }
+
+    /* ── CTA ── */
+    .cs-cta {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 52px;
+    }
+    .cs-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 13px 24px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.18s;
+    }
+    .cs-btn--primary {
+      background: #0e0e0e;
+      color: #fff;
+    }
+    .cs-btn--primary:hover {
+      background: #2a2a2a;
+      transform: translateY(-1px);
+    }
+    .cs-btn--secondary {
+      background: #fff;
+      color: var(--black);
+      border: 1px solid rgba(0,0,0,0.12);
+    }
+    .cs-btn--secondary:hover {
+      border-color: rgba(0,0,0,0.25);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 700px) {
+      .cs-wrap { padding: 48px 20px 80px; }
+      .cs-meta { grid-template-columns: 1fr 1fr; }
+      .cs-meta-item:nth-child(2) { border-right: none; }
+      .cs-meta-item:nth-child(3) { border-top: 1px solid rgba(0,0,0,0.07); border-right: 1px solid rgba(0,0,0,0.07); }
+      .cs-meta-item:nth-child(4) { border-top: 1px solid rgba(0,0,0,0.07); }
+      .cs-features { grid-template-columns: 1fr; }
+      .cs-arch-row { flex-direction: column; align-items: stretch; gap: 6px; }
+      .cs-arch-arrow { transform: rotate(90deg); }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="index.html">Hafsa Yaseen</a>
+  <div class="nav-center">
+    <a href="index.html#work" class="nav-link">Work</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="experience.html" class="nav-link">Experience</a>
+    <a href="ai-projects.html" class="nav-link">AI Lab</a>
+  </div>
+  <div class="nav-right">
+    <a class="nav-icon" href="https://www.linkedin.com/in/-hafsa-yaseen/" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+  </div>
+</nav>
+
+<div class="cs-wrap">
+
+  <a href="ai-projects.html" class="cs-back">← AI Lab</a>
+
+  <!-- Hero -->
+  <div class="cs-eyebrow">
+    <span class="cs-badge cs-badge--live"><span class="cs-live-dot"></span>Live</span>
+    <span class="cs-badge">AI Tool</span>
+    <span class="cs-year">2025</span>
+  </div>
+
+  <h1 class="cs-title">Critical Thinking Coach</h1>
+  <p class="cs-lead">A Socratic AI that never gives you answers — only better questions. Built to sharpen reasoning through real-world scenarios, personal decisions, and honest evaluation.</p>
+
+  <!-- Meta strip -->
+  <div class="cs-meta">
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Type</div>
+      <div class="cs-meta-value">Full-stack web app</div>
+    </div>
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Stack</div>
+      <div class="cs-meta-value">React · Claude API · Netlify</div>
+    </div>
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Build time</div>
+      <div class="cs-meta-value">1 session</div>
+    </div>
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Status</div>
+      <div class="cs-meta-value">Live & deployed</div>
+    </div>
+  </div>
+
+  <!-- Problem -->
+  <div class="cs-section-label">The problem</div>
+  <h2 class="cs-h2">Most AI tools give you answers. That's the problem.</h2>
+  <p class="cs-p">
+    There's no shortage of AI that will tell you what to think, summarise arguments for you, or write your reasoning out. But <strong>critical thinking is a muscle</strong> — and you don't build it by being handed conclusions.
+  </p>
+  <p class="cs-p">
+    I wanted to build something that worked the other way: a tool that takes a position you've half-formed and systematically pulls it apart — not to win an argument, but to help you think more clearly.
+  </p>
+
+  <div class="cs-quote">
+    <p>"The goal isn't to change what you think. It's to make you actually know why you think it."</p>
+  </div>
+
+  <div class="cs-divider"></div>
+
+  <!-- What I built -->
+  <div class="cs-section-label">What I built</div>
+  <h2 class="cs-h2">A Socratic coach with invisible scaffolding</h2>
+  <p class="cs-p">
+    The app presents real-world scenarios across six domains — or lets you bring a personal decision you're wrestling with — and then acts as a Socratic coach: never offering opinions, only asking the questions that surface your assumptions, challenge your evidence, and push you toward perspectives you haven't considered.
+  </p>
+  <p class="cs-p">
+    Underneath, the coach is silently assessing five components of critical thinking — Analysis, Evaluation, Inference, Explanation, and Self-Regulation — without ever naming them. When you request an evaluation, you get scored on each one individually, with specific feedback on where your reasoning was sharp and where it had gaps.
+  </p>
+
+  <div class="cs-features">
+    <div class="cs-feature">
+      <div class="cs-feature-icon">🧭</div>
+      <div class="cs-feature-title">6 scenario domains</div>
+      <div class="cs-feature-body">Social issues, ethical dilemmas, policy & politics, technology, economics, cultural debates — each with four difficulty tiers from Foundation to Expert.</div>
+    </div>
+    <div class="cs-feature">
+      <div class="cs-feature-icon">🪞</div>
+      <div class="cs-feature-title">Personal decisions mode</div>
+      <div class="cs-feature-body">Bring a real decision you're stuck on. The coach treats it with appropriate weight — pushing back on rationalisation without playing therapist.</div>
+    </div>
+    <div class="cs-feature">
+      <div class="cs-feature-icon">◈</div>
+      <div class="cs-feature-title">5-component evaluation</div>
+      <div class="cs-feature-body">After 2+ exchanges, request an evaluation. Get scored individually on Analysis, Evaluation, Inference, Explanation, and Self-Regulation.</div>
+    </div>
+    <div class="cs-feature">
+      <div class="cs-feature-icon">↑</div>
+      <div class="cs-feature-title">Auto level progression</div>
+      <div class="cs-feature-body">Score well enough and the difficulty automatically increases — harder scenarios, deeper tensions, less obvious trade-offs.</div>
+    </div>
+  </div>
+
+  <div class="cs-divider"></div>
+
+  <!-- Difficulty levels -->
+  <div class="cs-section-label">Design detail</div>
+  <h2 class="cs-h2">Four difficulty tiers, calibrated by complexity</h2>
+  <p class="cs-p">
+    Each level changes not just the topic difficulty but the <strong>nature of the reasoning required</strong>. At Level 1, there are clear stakeholders and obvious trade-offs. By Level 4, you're dealing with wicked problems — no clean answers, only managed tensions.
+  </p>
+
+  <table class="cs-table">
+    <thead>
+      <tr>
+        <th>Level</th>
+        <th>Name</th>
+        <th>What it demands</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Foundation</td>
+        <td>Identifying the main trade-offs; articulating a position with basic reasoning</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Developing</td>
+        <td>Holding multiple valid perspectives simultaneously; surfacing hidden assumptions</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Advanced</td>
+        <td>Historical context, systemic factors, competing values — no easy resolution</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Expert</td>
+        <td>Global implications, deep philosophical tensions, second and third-order consequences</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="cs-divider"></div>
+
+  <!-- Technical architecture -->
+  <div class="cs-section-label">Technical architecture</div>
+  <h2 class="cs-h2">React frontend, serverless backend, zero exposed keys</h2>
+  <p class="cs-p">
+    The stack is intentionally simple. A React single-page application handles all UI state — screens, conversation history, evaluation results. All Claude API calls are proxied through Netlify serverless functions, which keeps the API key secure server-side.
+  </p>
+
+  <div class="cs-arch">
+    <div class="cs-arch-title">Request flow</div>
+    <div class="cs-arch-row">
+      <div class="cs-arch-box">
+        Browser (React SPA)
+        <div class="cs-arch-sub">State, UI, conversation history</div>
+      </div>
+      <div class="cs-arch-arrow">→</div>
+      <div class="cs-arch-box">
+        Netlify Function /api/proxy
+        <div class="cs-arch-sub">Validates request, injects API key</div>
+      </div>
+      <div class="cs-arch-arrow">→</div>
+      <div class="cs-arch-box cs-arch-box--highlight">
+        Anthropic Claude API
+        <div class="cs-arch-sub">claude-sonnet-4-20250514</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="cs-p">
+    All prompt engineering lives on the client — the system prompts, mode switching (generate_scenario / coach / evaluate), and conversation context management all happen in the React component. The serverless function is a thin, secure proxy that never receives more than it needs to forward.
+  </p>
+
+  <div class="cs-stack">
+    <div class="cs-stack-item">
+      <span class="cs-stack-dot" style="background:#61dafb;"></span>
+      React (Vite)
+    </div>
+    <div class="cs-stack-item">
+      <span class="cs-stack-dot" style="background:#d97706;"></span>
+      Anthropic Claude API
+    </div>
+    <div class="cs-stack-item">
+      <span class="cs-stack-dot" style="background:#00ad9f;"></span>
+      Netlify Functions
+    </div>
+    <div class="cs-stack-item">
+      <span class="cs-stack-dot" style="background:#f97316;"></span>
+      ESM + esbuild
+    </div>
+    <div class="cs-stack-item">
+      <span class="cs-stack-dot" style="background:#6366f1;"></span>
+      GitHub (CI/CD)
+    </div>
+  </div>
+
+  <div class="cs-divider"></div>
+
+  <!-- Prompt engineering -->
+  <div class="cs-section-label">Prompt design</div>
+  <h2 class="cs-h2">The invisible scaffolding principle</h2>
+  <p class="cs-p">
+    The hardest part wasn't the React code — it was writing a system prompt that produces genuinely Socratic behaviour. The coach had to feel warm but never sycophantic, rigorous but never lecturing, and personal in the Personal Decisions mode without drifting into therapy.
+  </p>
+  <p class="cs-p">
+    The key design decision was <strong>making the 5 CT components invisible scaffolding</strong>. The coach doesn't label what it's doing ("Now let's evaluate your evidence…") — it just asks the questions that naturally surface each component. The evaluation is the only moment those components become visible, and only in retrospect.
+  </p>
+  <p class="cs-p">
+    I also built two separate system prompts — one for scenario mode, one for personal decisions — because the stakes and tone required meaningfully different behaviour. In Personal mode, the coach can name avoidance patterns and push on rationalisation more directly. In scenario mode, it stays more analytically neutral.
+  </p>
+
+  <div class="cs-divider"></div>
+
+  <!-- Reflection -->
+  <div class="cs-section-label">Reflection</div>
+  <div class="cs-reflection">
+    <div class="cs-reflection-label">What this taught me</div>
+    <p>
+      Building this clarified something important about how I want to use AI in my work: <strong>the most useful AI tools are often the ones that make you do the thinking</strong>, not the ones that do it for you. That's a different design brief than most AI products operate from.
+    </p>
+    <p>
+      Technically, the most interesting challenge was the serverless function setup — specifically getting the dependency bundling right for Netlify's build pipeline, and understanding the difference between esbuild's module resolution and Node's native module resolution at runtime.
+    </p>
+    <p>
+      The prompt engineering surprised me. Getting consistent Socratic behaviour across wildly different scenarios and difficulty levels required more iteration than the code did. A system prompt is a kind of design artefact — it has to handle edge cases, establish a tone, and constrain behaviour without making the output feel constrained.
+    </p>
+  </div>
+
+  <!-- CTA -->
+  <div class="cs-cta">
+    <a href="https://dainty-raindrop-722258.netlify.app" target="_blank" rel="noopener" class="cs-btn cs-btn--primary">
+      Try the app ↗
+    </a>
+    <a href="https://github.com/hafsayaseenhy99-cmd/critical-thinking-coach" target="_blank" rel="noopener" class="cs-btn cs-btn--secondary">
+      View on GitHub ↗
+    </a>
+    <a href="ai-projects.html" class="cs-btn cs-btn--secondary">
+      ← Back to AI Lab
+    </a>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-l">
+    <span class="footer-name">Hafsa Yaseen</span>
+    <span class="footer-role">Operations &amp; Project Coordination · London</span>
+  </div>
+  <div class="footer-r">
+    <a href="about.html">About</a>
+    <a href="experience.html">Experience</a>
+    <a href="ai-projects.html">AI Lab</a>
+    <a href="https://www.linkedin.com/in/-hafsa-yaseen/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a href="mailto:hafsayaseen@gmail.com">Email ↗</a>
+  </div>
+</footer>
+
+</body>
+</html>
