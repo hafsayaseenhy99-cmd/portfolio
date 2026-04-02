@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fellowship Finder Automation — Hafsa Yaseen</title>
+  <meta name="description" content="A Python automation that aggregates postdoctoral fellowships and academic jobs for Islamic Studies researchers, filters for relevance, and delivers a daily email digest.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .cs-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 72px 40px 120px;
+    }
+
+    .cs-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--mid);
+      text-decoration: none;
+      margin-bottom: 48px;
+      transition: color 0.15s;
+    }
+    .cs-back:hover { color: var(--black); }
+
+    .cs-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .cs-badge {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      background: #f0f0ee;
+      color: #555;
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+    .cs-badge--building {
+      background: #fef9c3;
+      color: #854d0e;
+    }
+    .cs-building-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: #ca8a04;
+      border-radius: 50%;
+      margin-right: 4px;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .cs-year { font-size: 12px; color: var(--light); }
+
+    .cs-title {
+      font-size: clamp(30px, 5vw, 46px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      color: var(--black);
+    }
+    .cs-lead {
+      font-size: 17px;
+      color: var(--mid);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      max-width: 620px;
+    }
+
+    .cs-meta {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 64px;
+      background: #fff;
+    }
+    .cs-meta-item {
+      padding: 20px 22px;
+      border-right: 1px solid rgba(0,0,0,0.07);
+    }
+    .cs-meta-item:last-child { border-right: none; }
+    .cs-meta-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--light);
+      margin-bottom: 5px;
+    }
+    .cs-meta-value {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--black);
+      line-height: 1.4;
+    }
+
+    .cs-divider { height: 1px; background: rgba(0,0,0,0.07); margin: 52px 0; }
+
+    .cs-section-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--light);
+      margin-bottom: 16px;
+    }
+    .cs-h2 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      margin-bottom: 14px;
+      line-height: 1.25;
+    }
+    .cs-p {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.78;
+      margin-bottom: 16px;
+    }
+    .cs-p:last-child { margin-bottom: 0; }
+    .cs-p strong { color: var(--black); font-weight: 700; }
+
+    .cs-quote {
+      border-left: 3px solid var(--black);
+      padding: 6px 0 6px 22px;
+      margin: 32px 0;
+    }
+    .cs-quote p {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--black);
+      line-height: 1.55;
+      font-style: italic;
+    }
+
+    /* Pipeline steps */
+    .cs-pipeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin: 28px 0;
+    }
+    .cs-step {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      position: relative;
+    }
+    .cs-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 40px;
+      bottom: -4px;
+      width: 2px;
+      background: rgba(0,0,0,0.08);
+    }
+    .cs-step-num {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #0e0e0e;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .cs-step-body {
+      padding: 8px 0 28px;
+    }
+    .cs-step-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 5px;
+    }
+    .cs-step-desc {
+      font-size: 13px;
+      color: var(--mid);
+      line-height: 1.65;
+    }
+    .cs-step-file {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: monospace;
+      background: #f0f0ee;
+      color: #555;
+      padding: 2px 8px;
+      border-radius: 5px;
+      margin-top: 6px;
+    }
+
+    /* Sources table */
+    .cs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 13px;
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.07);
+    }
+    .cs-table th {
+      background: #f5f5f3;
+      padding: 11px 16px;
+      text-align: left;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--light);
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .cs-table td {
+      padding: 11px 16px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      color: #444;
+      line-height: 1.5;
+      vertical-align: top;
+    }
+    .cs-table tr:last-child td { border-bottom: none; }
+    .cs-table td:first-child { font-weight: 700; color: var(--black); }
+
+    .cs-method-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .cs-method-badge--rss { background: #dbeafe; color: #1e40af; }
+    .cs-method-badge--scrape { background: #fde8d8; color: #7c2d12; }
+    .cs-method-badge--api { background: #d1fae5; color: #065f46; }
+
+    /* Tech stack */
+    .cs-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 20px 0;
+    }
+    .cs-stack-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--black);
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.09);
+      border-radius: 10px;
+      padding: 8px 14px;
+    }
+    .cs-stack-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Email preview mockup */
+    .cs-email-preview {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.09);
+      border-radius: 16px;
+      overflow: hidden;
+      margin: 28px 0;
+    }
+    .cs-email-header {
+      background: #f5f5f3;
+      padding: 14px 20px;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      display: flex;
+      gap: 16px;
+      align-items: baseline;
+    }
+    .cs-email-field {
+      font-size: 12px;
+      color: var(--mid);
+    }
+    .cs-email-field strong {
+      color: var(--black);
+      font-weight: 700;
+    }
+    .cs-email-body {
+      padding: 20px;
+    }
+    .cs-email-section {
+      margin-bottom: 18px;
+    }
+    .cs-email-section-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--light);
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      padding-bottom: 6px;
+      margin-bottom: 10px;
+    }
+    .cs-email-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+      gap: 16px;
+    }
+    .cs-email-item:last-child { border-bottom: none; }
+    .cs-email-item-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--black);
+      flex: 1;
+    }
+    .cs-email-item-meta {
+      font-size: 11px;
+      color: var(--mid);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .cs-email-score {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .cs-reflection {
+      background: #0e0e0e;
+      color: #e8e4df;
+      border-radius: 16px;
+      padding: 32px 32px 28px;
+      margin: 32px 0;
+    }
+    .cs-reflection-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #666;
+      margin-bottom: 14px;
+    }
+    .cs-reflection p {
+      font-size: 14.5px;
+      line-height: 1.75;
+      color: #b0a898;
+    }
+    .cs-reflection p + p { margin-top: 12px; }
+    .cs-reflection strong { color: #e8e4df; font-weight: 700; }
+
+    .cs-cta {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 52px;
+    }
+    .cs-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 13px 24px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.18s;
+    }
+    .cs-btn--primary {
+      background: #0e0e0e;
+      color: #fff;
+    }
+    .cs-btn--primary:hover { background: #2a2a2a; transform: translateY(-1px); }
+    .cs-btn--secondary {
+      background: #fff;
+      color: var(--black);
+      border: 1px solid rgba(0,0,0,0.12);
+    }
+    .cs-btn--secondary:hover { border-color: rgba(0,0,0,0.25); transform: translateY(-1px); }
+
+    @media (max-width: 700px) {
+      .cs-wrap { padding: 48px 20px 80px; }
+      .cs-meta { grid-template-columns: 1fr 1fr; }
+      .cs-meta-item:nth-child(2) { border-right: none; }
+      .cs-meta-item:nth-child(3) { border-top: 1px solid rgba(0,0,0,0.07); border-right: 1px solid rgba(0,0,0,0.07); }
+      .cs-meta-item:nth-child(4) { border-top: 1px solid rgba(0,0,0,0.07); }
+      .cs-email-header { flex-direction: column; gap: 4px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="index.html">Hafsa Yaseen</a>
+  <div class="nav-center">
+    <a href="index.html#work" class="nav-link">Work</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="experience.html" class="nav-link">Experience</a>
+    <a href="ai-projects.html" class="nav-link">AI Lab</a>
+  </div>
+  <div class="nav-right">
+    <a class="nav-icon" href="https://www.linkedin.com/in/-hafsa-yaseen/" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+  </div>
+</nav>
+
+<div class="cs-wrap">
+
+  <a href="ai-projects.html" class="cs-back">← AI Lab</a>
+
+  <div class="cs-eyebrow">
+    <span class="cs-badge cs-badge--building"><span class="cs-building-dot"></span>Building</span>
+    <span class="cs-badge">Python Automation</span>
+    <span class="cs-year">2025</span>
+  </div>
+
+  <h1 class="cs-title">Fellowship Finder Automation</h1>
+  <p class="cs-lead">A daily digest that automatically finds, filters, and delivers postdoctoral fellowships, academic jobs, and grants for Islamic Studies researchers — so they spend time applying, not searching.</p>
+
+  <div class="cs-meta">
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Type</div>
+      <div class="cs-meta-value">Python automation</div>
+    </div>
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Stack</div>
+      <div class="cs-meta-value">Python · SQLite · Gmail API</div>
+    </div>
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Sources</div>
+      <div class="cs-meta-value">13+ aggregated</div>
+    </div>
+    <div class="cs-meta-item">
+      <div class="cs-meta-label">Runs</div>
+      <div class="cs-meta-value">Daily via cron</div>
+    </div>
+  </div>
+
+  <!-- Problem -->
+  <div class="cs-section-label">The problem</div>
+  <h2 class="cs-h2">Academic opportunity discovery is broken</h2>
+  <p class="cs-p">
+    Postdoctoral fellowships, funded research positions, and academic grants are scattered across dozens of websites — H-Net, jobs.ac.uk, ACLS, the Mellon Foundation, individual university pages, discipline-specific listservs. There's no single place to look, and the postings that matter most are often buried under irrelevant listings or missed entirely because they appeared on a site you don't check.
+  </p>
+  <p class="cs-p">
+    For researchers in a specialised field like Islamic Studies, this is especially acute. <strong>Generic job boards weren't built for you.</strong> You end up doing the same manual trawl every week, on five different sites, for opportunities that may not exist — and occasionally missing one that did.
+  </p>
+
+  <div class="cs-quote">
+    <p>"The people who most need to know about these opportunities are the ones with the least time to go looking for them."</p>
+  </div>
+
+  <div class="cs-divider"></div>
+
+  <!-- What I built -->
+  <div class="cs-section-label">What I built</div>
+  <h2 class="cs-h2">A five-component Python pipeline, running daily</h2>
+  <p class="cs-p">
+    The system scrapes, scores, deduplicates, and delivers — fully automated. It runs each morning via a cron job and only emails when there's something genuinely new and relevant.
+  </p>
+
+  <div class="cs-pipeline">
+    <div class="cs-step">
+      <div class="cs-step-num">1</div>
+      <div class="cs-step-body">
+        <div class="cs-step-title">Source aggregation</div>
+        <div class="cs-step-desc">RSS parsers pull structured feeds from H-Net, jobs.ac.uk, and Times Higher Education. Custom scrapers target FindAPostDoc, ACLS, Mellon, MESA, and others. A Google Custom Search API integration catches smaller sites that don't offer feeds.</div>
+        <span class="cs-step-file">sources.py</span>
+      </div>
+    </div>
+    <div class="cs-step">
+      <div class="cs-step-num">2</div>
+      <div class="cs-step-body">
+        <div class="cs-step-title">Relevance filtering & scoring</div>
+        <div class="cs-step-desc">Each result is scored against a keyword taxonomy — exact field matches (islamic studies, quran, hadith, fiqh) score highest; partial matches (MENA, Arabic, Ottoman, theology) score lower; broad matches (religion, Middle East) act as catch-all filters. Expired postings are automatically excluded where dates are detectable.</div>
+        <span class="cs-step-file">filters.py</span>
+      </div>
+    </div>
+    <div class="cs-step">
+      <div class="cs-step-num">3</div>
+      <div class="cs-step-body">
+        <div class="cs-step-title">Deduplication via SQLite</div>
+        <div class="cs-step-desc">Every seen opportunity is stored by URL + title hash. Subsequent runs check against this store so the same posting never appears twice, even if it resurfaces across different sources. Once sent, it's marked so it never re-enters the digest.</div>
+        <span class="cs-step-file">database.py</span>
+      </div>
+    </div>
+    <div class="cs-step">
+      <div class="cs-step-num">4</div>
+      <div class="cs-step-body">
+        <div class="cs-step-title">HTML email digest</div>
+        <div class="cs-step-desc">New opportunities are grouped by category — Postdocs, Fellowships, Faculty, Grants & Awards, Alt-Academic — and formatted into a clean HTML email showing title, institution, location, deadline, link, and relevance score. Sent via Gmail SMTP using an App Password.</div>
+        <span class="cs-step-file">email_digest.py</span>
+      </div>
+    </div>
+    <div class="cs-step">
+      <div class="cs-step-num">5</div>
+      <div class="cs-step-body">
+        <div class="cs-step-title">Daily cron orchestration</div>
+        <div class="cs-step-desc">The main orchestrator runs all scrapers, filters results, stores new items, and sends the digest — only if there's something new. Designed to run silently at 8am daily with a single cron entry.</div>
+        <span class="cs-step-file">main.py</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-divider"></div>
+
+  <!-- Sources -->
+  <div class="cs-section-label">Data sources</div>
+  <h2 class="cs-h2">13 sources across RSS, scraping, and search APIs</h2>
+
+  <table class="cs-table">
+    <thead>
+      <tr>
+        <th>Source</th>
+        <th>Method</th>
+        <th>Coverage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>H-Net Job Guide</td>
+        <td><span class="cs-method-badge cs-method-badge--rss">RSS</span></td>
+        <td>Humanities & social science academic jobs</td>
+      </tr>
+      <tr>
+        <td>jobs.ac.uk</td>
+        <td><span class="cs-method-badge cs-method-badge--rss">RSS</span></td>
+        <td>UK + international academic positions</td>
+      </tr>
+      <tr>
+        <td>Times Higher Education</td>
+        <td><span class="cs-method-badge cs-method-badge--rss">RSS</span></td>
+        <td>Global academic jobs</td>
+      </tr>
+      <tr>
+        <td>FindAPostDoc</td>
+        <td><span class="cs-method-badge cs-method-badge--scrape">Scrape</span></td>
+        <td>Global postdoc listings</td>
+      </tr>
+      <tr>
+        <td>ACLS</td>
+        <td><span class="cs-method-badge cs-method-badge--scrape">Scrape</span></td>
+        <td>Humanities fellowship announcements</td>
+      </tr>
+      <tr>
+        <td>Mellon Foundation</td>
+        <td><span class="cs-method-badge cs-method-badge--scrape">Scrape</span></td>
+        <td>Funded research fellowships</td>
+      </tr>
+      <tr>
+        <td>MESA</td>
+        <td><span class="cs-method-badge cs-method-badge--scrape">Scrape</span></td>
+        <td>Middle East Studies positions</td>
+      </tr>
+      <tr>
+        <td>HigherEdJobs</td>
+        <td><span class="cs-method-badge cs-method-badge--scrape">Scrape</span></td>
+        <td>US academic positions</td>
+      </tr>
+      <tr>
+        <td>Chronicle Vitae</td>
+        <td><span class="cs-method-badge cs-method-badge--scrape">Scrape</span></td>
+        <td>US-focused academic jobs</td>
+      </tr>
+      <tr>
+        <td>AcademicTransfer</td>
+        <td><span class="cs-method-badge cs-method-badge--scrape">Scrape</span></td>
+        <td>European academic positions</td>
+      </tr>
+      <tr>
+        <td>SSRC</td>
+        <td><span class="cs-method-badge cs-method-badge--scrape">Scrape</span></td>
+        <td>Social science fellowships</td>
+      </tr>
+      <tr>
+        <td>Brookings / RAND / CFR</td>
+        <td><span class="cs-method-badge cs-method-badge--scrape">Scrape</span></td>
+        <td>Think tank research positions</td>
+      </tr>
+      <tr>
+        <td>Google Custom Search</td>
+        <td><span class="cs-method-badge cs-method-badge--api">API</span></td>
+        <td>Catch-all for smaller & newer sites</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="cs-divider"></div>
+
+  <!-- Email preview -->
+  <div class="cs-section-label">Output</div>
+  <h2 class="cs-h2">A digest that arrives when it's useful, silent when it's not</h2>
+  <p class="cs-p">
+    The email only sends on days with genuinely new results — no noise, no repeat listings. Opportunities are grouped by type so researchers can scan for what's relevant to them.
+  </p>
+
+  <div class="cs-email-preview">
+    <div class="cs-email-header">
+      <span class="cs-email-field"><strong>From:</strong> Fellowship Finder</span>
+      <span class="cs-email-field"><strong>Subject:</strong> 4 new opportunities — Islamic Studies · Today</span>
+    </div>
+    <div class="cs-email-body">
+      <div class="cs-email-section">
+        <div class="cs-email-section-label">Fellowships</div>
+        <div class="cs-email-item">
+          <div class="cs-email-item-title">ACLS Mellon Faculty Fellowship — Islamic Philosophy</div>
+          <div class="cs-email-item-meta"><span class="cs-email-score">High match</span> · Deadline Mar 15</div>
+        </div>
+        <div class="cs-email-item">
+          <div class="cs-email-item-title">Fulbright Islamic Civilisations Research Award</div>
+          <div class="cs-email-item-meta"><span class="cs-email-score">High match</span> · Deadline Apr 1</div>
+        </div>
+      </div>
+      <div class="cs-email-section">
+        <div class="cs-email-section-label">Postdocs</div>
+        <div class="cs-email-item">
+          <div class="cs-email-item-title">Postdoctoral Research Fellow — Ottoman History, Oxford</div>
+          <div class="cs-email-item-meta"><span class="cs-email-score">High match</span> · Rolling</div>
+        </div>
+      </div>
+      <div class="cs-email-section">
+        <div class="cs-email-section-label">Faculty</div>
+        <div class="cs-email-item">
+          <div class="cs-email-item-title">Lecturer in Islamic Studies — Aga Khan University</div>
+          <div class="cs-email-item-meta"><span class="cs-email-score">High match</span> · Deadline Feb 28</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-divider"></div>
+
+  <!-- Tech stack -->
+  <div class="cs-section-label">Technical design</div>
+  <h2 class="cs-h2">Deliberately simple. Reliably daily.</h2>
+  <p class="cs-p">
+    The stack is intentionally minimal — no external services, no cloud dependencies, no ongoing costs. Everything runs locally. SQLite handles persistence without a server. Gmail SMTP handles delivery without a mail provider. The only setup a user needs is a Gmail App Password and a cron entry.
+  </p>
+  <p class="cs-p">
+    The keyword scoring system is designed to be transparent and editable — researchers can open <code style="font-size:13px;background:#f0f0ee;padding:2px 6px;border-radius:4px;">config.py</code> and adjust the keyword lists without touching any scraping logic. That matters when the field you're in has terminology that evolves.
+  </p>
+
+  <div class="cs-stack">
+    <div class="cs-stack-item">
+      <span class="cs-stack-dot" style="background:#3776ab;"></span>
+      Python 3
+    </div>
+    <div class="cs-stack-item">
+      <span class="cs-stack-dot" style="background:#888;"></span>
+      SQLite
+    </div>
+    <div class="cs-stack-item">
+      <span class="cs-stack-dot" style="background:#ea4335;"></span>
+      Gmail SMTP
+    </div>
+    <div class="cs-stack-item">
+      <span class="cs-stack-dot" style="background:#4285f4;"></span>
+      Google Custom Search API
+    </div>
+    <div class="cs-stack-item">
+      <span class="cs-stack-dot" style="background:#f97316;"></span>
+      BeautifulSoup4
+    </div>
+    <div class="cs-stack-item">
+      <span class="cs-stack-dot" style="background:#5B7A5E;"></span>
+      feedparser
+    </div>
+    <div class="cs-stack-item">
+      <span class="cs-stack-dot" style="background:#888;"></span>
+      cron
+    </div>
+  </div>
+
+  <div class="cs-divider"></div>
+
+  <!-- Reflection -->
+  <div class="cs-section-label">Reflection</div>
+  <div class="cs-reflection">
+    <div class="cs-reflection-label">What this taught me</div>
+    <p>
+      This project clarified something I keep coming back to in ops work: <strong>the most valuable automation is often the one that removes a recurring, low-value task that nobody has time to eliminate manually.</strong> Researchers weren't failing to find fellowships because they weren't smart enough — they were failing because the information infrastructure wasn't designed for them.
+    </p>
+    <p>
+      The scraping side required more judgement than I expected. Different sites structure their listings differently, update at different cadences, and occasionally change their layouts. Building resilient scrapers meant thinking about failure modes — what happens when a site is down, when a result has no deadline, when a listing resurfaces with a slightly different title. The deduplication logic ended up being one of the most important parts of the system.
+    </p>
+    <p>
+      The keyword scoring system also taught me something about domain specificity. <strong>Islamic Studies isn't just "religion"</strong> — the relevant terminology spans Arabic, Persian, and Ottoman historical traditions, specific jurisprudential schools, regional area studies, and contemporary policy contexts. Getting the filter right meant actually understanding the field, not just pattern-matching on obvious terms.
+    </p>
+  </div>
+
+  <div class="cs-cta">
+    <a href="ai-projects.html" class="cs-btn cs-btn--secondary">
+      ← Back to AI Lab
+    </a>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-l">
+    <span class="footer-name">Hafsa Yaseen</span>
+    <span class="footer-role">Operations &amp; Project Coordination · London</span>
+  </div>
+  <div class="footer-r">
+    <a href="about.html">About</a>
+    <a href="experience.html">Experience</a>
+    <a href="ai-projects.html">AI Lab</a>
+    <a href="https://www.linkedin.com/in/-hafsa-yaseen/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a href="mailto:hafsayaseen@gmail.com">Email ↗</a>
+  </div>
+</footer>
+
+</body>
+</html>
